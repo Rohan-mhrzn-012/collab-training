@@ -1,54 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Register Form</title>
 </head>
 <link rel="stylesheet" href="style.css">
+
 <body>
-  <div class="container">
-    <div id="heading"><h2>Registration Form</h2></div>
+  <div class="wrapper">
+    <div class="container">
+      <div id="heading">
+        <h2>Registration Form</h2>
+      </div>
 
-  <form action="#" method="POST">
-    
-    <div class="box1">
-    <label for="fullname">Full Name:</label><br>
-    <input type="text" id="fullname" name="fullname" required><br><br>
+      <form action="#" method="POST">
 
-    <label for="email">Email Address:</label><br>
-    <input type="email" id="email" name="email" required><br><br>
+        <div class="form-row">
+          <div>
+            <label for="fullname">Full Name:</label><br>
+            <input type="text" id="fullname" name="fullname" class="form-control" required>
+          </div>
+
+          <div>
+            <label for="email">Email Address:</label><br>
+            <input type="email" id="email" name="email" class="form-control" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div>
+            <label for="password">Password:</label><br>
+            <input type="password" id="password" name="password" class="form-control" required>
+          </div>
+
+          <div>
+            <label for="confirm">Confirm Password:</label><br>
+            <input type="password" id="confirm" name="confirm" class="form-control" required>
+          </div>
+        </div>
+
+
+        <label for="gender">Gender:</label><br>
+        <select id="gender" name="gender">
+          <option value="">--Select--</option>
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+          <option value="other">Other</option>
+        </select><br><br>
+
+        <label>
+          <input type="checkbox" name="agree" required>
+          I agree to the terms and conditions
+        </label><br><br>
+
+        <div class="button">
+          <button type="submit" id="my_button">Register</button>
+        </div>
+
+
+      </form>
     </div>
-    
-    <div class="box2">
-      <label for="password">Password:</label><br>
-    <input type="password" id="password" name="password" required><br><br>
-
-    <label for="confirm">Confirm Password:</label><br>
-    <input type="password" id="confirm" name="confirm" required><br><br>
-    </div>
-    
-
-    <label for="gender">Gender:</label><br>
-    <select id="gender" name="gender">
-      <option value="">--Select--</option>
-      <option value="male">Male</option>
-      <option value="female">Female</option>
-      <option value="other">Other</option>
-    </select><br><br>
-
-    <label>
-      <input type="checkbox" name="agree" required>
-      I agree to the terms and conditions
-    </label><br><br>
-
-    <div class="button">
-    <button type="submit" id="my_button">Register</button>
-    </div>
-    
-
-  </form>
   </div>
-  
+
 
 </body>
+
 </html>
