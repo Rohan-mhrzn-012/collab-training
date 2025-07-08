@@ -1,0 +1,46 @@
+.container{
+    width: 600px;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid rgb(95, 90, 90);
+    padding:25px;
+    margin-left:400px;
+    margin-top: 150px;
+    background-color: white;
+    border-radius: 10px;
+    
+}
+.box1{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 50px;
+
+}
+
+.box2{
+    display: flex;
+    gap:5px;
+    margin-bottom: 50px;
+}
+
+body{
+    background-color: rgb(235, 163, 63);
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+#heading{
+    font-family: cursive;
+    margin-bottom: 50px;
+}
+.button{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+#my_button{
+    background-color: rgb(46, 238, 24);
+    border-radius: 5px;
+}

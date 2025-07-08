@@ -4,23 +4,29 @@
   <meta charset="UTF-8">
   <title>Register Form</title>
 </head>
+<link rel="stylesheet" href="style.css">
 <body>
-
-  <h2>Registration Form</h2>
+  <div class="container">
+    <div id="heading"><h2>Registration Form</h2></div>
 
   <form action="#" method="POST">
     
+    <div class="box1">
     <label for="fullname">Full Name:</label><br>
     <input type="text" id="fullname" name="fullname" required><br><br>
 
     <label for="email">Email Address:</label><br>
     <input type="email" id="email" name="email" required><br><br>
-
-    <label for="password">Password:</label><br>
+    </div>
+    
+    <div class="box2">
+      <label for="password">Password:</label><br>
     <input type="password" id="password" name="password" required><br><br>
 
     <label for="confirm">Confirm Password:</label><br>
     <input type="password" id="confirm" name="confirm" required><br><br>
+    </div>
+    
 
     <label for="gender">Gender:</label><br>
     <select id="gender" name="gender">
@@ -35,9 +41,14 @@
       I agree to the terms and conditions
     </label><br><br>
 
-    <button type="submit">Register</button>
+    <div class="button">
+    <button type="submit" id="my_button">Register</button>
+    </div>
+    
 
   </form>
+  </div>
+  
 
 </body>
 </html>
