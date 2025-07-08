@@ -12,10 +12,12 @@ document.getElementById("my_button").addEventListener("click", function (e) {
   const error = [];
 
   if (name === "") {
+
     error.push("FullName is required");
   }
 
   if (!gmailRegex.test(email)) {
+
     error.push("Email pattern should be @gmail.com");
   }
 
@@ -34,20 +36,27 @@ document.getElementById("my_button").addEventListener("click", function (e) {
   if (!agreed) {
     error.push(" You must agree to the terms and conditions");
   }
-  const errors = document.querySelector(".errors");
-  console.log(errors);
-  const ul = document.createElement("ul");
-  error.forEach((err) => {
-    const li = document.createElement("li");
-    li.textContent = err;
-    ul.appendChild(li);
+
+  // error cha bhae matra
+  if (error.length > 0) {
+    //chanyo paila
+    const errors = document.querySelector(".errors");
 
 
+    const ul = document.createElement("ul");
+
+    error.forEach((err) => {
+        const li = document.createElement("li");
+        li.textContent = err;
+        ul.appendChild(li);
+      }
+    )
+
+    errors.appendChild(ul);
+
+    return;
+  }else{
+    alert("Registration successful!");
   }
 
-
-  )
-  errors.appendChild(ul);
-  alert("Registration successful!");
-  document.querySelector("form").reset();
 });
