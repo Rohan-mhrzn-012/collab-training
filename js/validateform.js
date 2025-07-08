@@ -1,4 +1,4 @@
-document.getElementById("submit").addEventListener("click", function (e) {
+document.getElementById("my_button").addEventListener("click", function (e) {
   e.preventDefault();
 
   const name = document.getElementById("fullname").value.trim();
