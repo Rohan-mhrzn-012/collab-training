@@ -9,37 +9,45 @@ document.getElementById("my_button").addEventListener("click", function (e) {
   const agreed = document.querySelector("input[name='agree']").checked;
 
   const gmailRegex = /^[a-z0-9._%+-]+@gmail\.com$/i;
+  const error = [];
 
   if (name === "") {
-    alert(" Full Name is required");
-    return;
+    error.push("FullName is required");
   }
 
   if (!gmailRegex.test(email)) {
-    alert(" Please enter a valid Gmail address");
-    return;
+    error.push("Email pattern should be @gmail.com");
   }
 
   if (password.length < 8) {
-    alert(" Password must be at least 6 characters");
-    return;
+    error.push(" Password must be at least 8 characters");
   }
 
   if (password !== confirm) {
-    alert(" Passwords do not match");
-    return;
+    error.push(" Passwords do not match");
   }
 
   if (gender === "") {
-    alert(" Please select your gender");
-    return;
+    error.push(" Please select your gender");
   }
 
   if (!agreed) {
-    alert(" You must agree to the terms and conditions");
-    return;
+    error.push(" You must agree to the terms and conditions");
+  }
+  const errors = document.querySelector(".errors");
+  console.log(errors);
+  const ul = document.createElement("ul");
+  error.forEach((err) => {
+    const li = document.createElement("li");
+    li.textContent = err;
+    ul.appendChild(li);
+
+
   }
 
+
+  )
+  errors.appendChild(ul);
   alert("Registration successful!");
-  document.querySelector("form").reset(); 
+  document.querySelector("form").reset();
 });
