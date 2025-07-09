@@ -1,0 +1,59 @@
+* {
+      margin: 0;
+      padding: 0;
+      
+    }
+
+    body {
+      height: 100vh;
+      background: #eef1f5;
+      display: grid;
+      justify-content: center;
+      align-content: center;
+
+    }
+    h2 {
+        text-align: center;
+        padding-left: 50px;
+        
+    }
+
+    .login-container {
+      background: #fff;
+      padding: 40px 30px;
+      border-radius: 10px;
+      display: grid;
+      justify-content: center;
+      width: 100%;
+    }
+
+    label {
+      font-weight: 600;
+      color: #555;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      padding: 10px 12px;
+      border: 1px solid #887171;
+      border-radius: 6px;
+      font-size: 16px;
+    }
+
+    input:focus {
+      border-color: #007BFF;
+      outline: none;
+    }
+
+    button {
+      padding: 12px;
+      background-color: #007BFF;
+      border: none;
+      color: white;
+      font-size: 16px;
+      border-radius: 6px;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
