@@ -1,62 +1,74 @@
-document.getElementById("my_button").addEventListener("click", function (e) {
-  e.preventDefault();
+import { checkEmpty, checkPattern, checkLength } from './validationHelper.js';
 
-  const name = document.getElementById("fullname").value.trim();
-  const email = document.getElementById("email").value.trim();
-  const password = document.getElementById("password").value;
-  const confirm = document.getElementById("confirm").value;
-  const gender = document.getElementById("gender").value;
-  const agreed = document.querySelector("input[name='agree']").checked;
+const registerForm = document.getElementById("register-form");
 
-  const gmailRegex = /^[a-z0-9._%+-]+@gmail\.com$/i;
-  const error = [];
+registerForm.addEventListener("submit", function (e) {
+  e.preventDefault(); 
 
-  if (name === "") {
-
-    error.push("FullName is required");
-  }
-
-  if (!gmailRegex.test(email)) {
-
-    error.push("Email pattern should be @gmail.com");
-  }
-
-  if (password.length < 8) {
-    error.push(" Password must be at least 8 characters");
-  }
-
-  if (password !== confirm) {
-    error.push(" Passwords do not match");
-  }
-
-  if (gender === "") {
-    error.push(" Please select your gender");
-  }
-
-  if (!agreed) {
-    error.push(" You must agree to the terms and conditions");
-  }
-
-  // error cha bhae matra
-  if (error.length > 0) {
-    //chanyo paila
-    const errors = document.querySelector(".errors");
-
-
-    const ul = document.createElement("ul");
-
-    error.forEach((err) => {
-        const li = document.createElement("li");
-        li.textContent = err;
-        ul.appendChild(li);
-      }
-    )
-
-    errors.appendChild(ul);
-
-    return;
-  }else{
+  // for validating the form
+  const isValidated = validateForm();
+  
+  if (isValidated) {
     alert("Registration successful!");
   }
+})
 
+// validates register form before submit
+function validateForm() {
+  const nameElement = document.getElementById("fullname");
+  const emailElement = document.getElementById("email");
+  const passwordElement = document.getElementById("password");
+  const confirmPasswordElement = document.getElementById("confirm");
+  const userElement = document.getElementById("username");
+  const genderElement = document.getElementById("gender");
+  const agreedElement = document.querySelector("input[name='agree']");
+
+  const gmailRegex = /^[a-z0-9._%+-]+@gmail\.com$/i;
+
+  // validation pass cha first ma bhanera bujney
+  let validationPassed = true;
+
+  validationPassed = checkEmpty(nameElement, "Full name is required")
+  validationPassed = checkEmpty(userElement, "Username is required")
+  validationPassed = checkPattern(emailElement, gmailRegex, "Email pattern should be @gmail.com");
+  validationPassed = checkLength(passwordElement, 8, "Password must be at least 8 characters");
+
+  if (passwordElement.value !== confirmPasswordElement.value) {
+    const errorSpan = confirmPasswordElement.closest(".form-group").querySelector(".error-section");
+    errorSpan.textContent = "Passwords do not match";
+    validationPassed = false;
+  }
+  validationPassed = checkEmpty(genderElement, "Please select your gender");
+
+
+  if (!agreedElement.checked) {
+    const errorSpan = agreedElement.closest(".form-group").querySelector(".error-section");
+    errorSpan.textContent = "You must agree to the terms and conditions";
+  }
+
+  return validationPassed;
+}
+
+
+// resets error currently displayed on page
+function resetErrorDisplayed() {
+  const formControls = document.querySelectorAll('.form-control, .checkbox-control');
+
+  formControls.forEach((control) => {
+    const clearError = () => {
+      const errorSpan = control.closest(".form-group").querySelector(".error-section");
+      if (errorSpan) {
+        errorSpan.textContent = "";
+      }
+    };
+
+    control.addEventListener("input", clearError);
+    control.addEventListener("change", clearError);
+    control.addEventListener("focus", clearError);
+  });
+}
+
+// on document loaded insert the resetErrorDisplay function for all the form-control
+document.addEventListener("DOMContentLoaded", () => {
+  resetErrorDisplayed();
 });
