@@ -1,4 +1,4 @@
-import { checkEmpty, checkPattern, checkLength } from './validationHelper.js';
+import { checkEmpty, checkPattern, checkLength } from './helpers/validationHelper.js';
 
 const registerForm = document.getElementById("register-form");
 
@@ -9,7 +9,7 @@ registerForm.addEventListener("submit", function (e) {
   const isValidated = validateForm();
   
   if (isValidated) {
-    alert("Registration successful!");
+    registerForm.submit();
   }
 })
 
