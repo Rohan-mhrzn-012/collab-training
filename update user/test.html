@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Editable Profile</title>
+  <style>
+    #profile {
+      max-width: 400px;
+      margin: 40px auto;
+      padding: 20px;
+      border-radius: 10px;
+      background: linear-gradient(to bottom right, #f9f9f9, #e0e0e0);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    #profile img {
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 50%;
+      margin-bottom: 10px;
+    }
+
+    .bar {
+      width: 80%;
+      height: auto;
+      margin-top: 10px;
+    }
+
+    #editForm {
+      max-width: 400px;
+      margin: 20px auto;
+      padding: 15px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      background: #fff;
+    }
+
+    #editForm label {
+      display: block;
+      margin: 10px 0 5px;
+      font-weight: bold;
+    }
+
+    #editForm input {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 10px;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+<div id="profile">
+  <div id="fpart">
+    <img src="image/3135715.png" alt="photo" id="imgPreview">
+    <p class="uname" id="nameDisplay">Ajay Bhayadyo</p>
+    <p class="job" id="jobDisplay">Graphic Designer</p>
+  </div>
+  
+  <div id="spart">
+    <p id="idnoDisplay">id:1500000</p>
+    <p id="jdateDisplay">join date: 2024/06/06</p>
+    <p id="numDisplay">Number: 9864455</p>
+    <img src="image/bar.png" alt="barcode" id="barPreview" class="bar">
+  </div>
+
+  <button id="editBtn">Edit</button>
+</div>
+
+<form id="editForm" style="display: none;">
+  <label>Profile Image: <input type="file" id="imgInput" accept="image/*"></label>
+  <label>Name: <input type="text" id="nameInput"></label>
+  <label>Job: <input type="text" id="jobInput"></label>
+  <label>ID: <input type="text" id="idInput"></label>
+  <label>Join Date: <input type="date" id="jdateInput"></label>
+  <label>Number: <input type="text" id="numInput"></label>
+  <label>Barcode Image: <input type="file" id="barInput" accept="image/*"></label>
+  <button type="submit">Save</button>
+</form>
+
+<script>
+const editBtn = document.getElementById('editBtn');
+const editForm = document.getElementById('editForm');
+
+editBtn.addEventListener('click', () => {
+  editForm.style.display = 'block';
+
+  document.getElementById('nameInput').value = document.getElementById('nameDisplay').textContent;
+  document.getElementById('jobInput').value = document.getElementById('jobDisplay').textContent;
+  document.getElementById('idInput').value = document.getElementById('idnoDisplay').textContent.replace('id:', '').trim();
+  document.getElementById('jdateInput').value = document.getElementById('jdateDisplay').textContent.replace('join date:', '').trim();
+  document.getElementById('numInput').value = document.getElementById('numDisplay').textContent.replace('Number:', '').trim();
+});
+
+editForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+
+  document.getElementById('nameDisplay').textContent = document.getElementById('nameInput').value;
+  document.getElementById('jobDisplay').textContent = document.getElementById('jobInput').value;
+  document.getElementById('idnoDisplay').textContent = "id:" + document.getElementById('idInput').value;
+  document.getElementById('jdateDisplay').textContent = "join date: " + document.getElementById('jdateInput').value;
+  document.getElementById('numDisplay').textContent = "Number: " + document.getElementById('numInput').value;
+
+  const imgFile = document.getElementById('imgInput').files[0];
+  if (imgFile) {
+    document.getElementById('imgPreview').src = URL.createObjectURL(imgFile);
+  }
+
+  const barFile = document.getElementById('barInput').files[0];
+  if (barFile) {
+    document.getElementById('barPreview').src = URL.createObjectURL(barFile);
+  }
+
+  editForm.style.display = 'none';
+});
+</script>
+
+</body>
+</html>

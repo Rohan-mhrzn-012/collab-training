@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update user</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div id="id">
+        
+        
+        <div id="fpart">
+            <img src="image/3135715.png" alt="photo" id="img">
+            <p class="uname">Ajay Bhayadyo</p>
+            <p class="job">Graphic Designer</p>
+        </div>
+        <div id="spart">
+            <p id="idno">id:1500000</p>
+            <p id="jdate">join date :2024/06/06</p>
+            <p id="num">Number: 9864455</p>
+            <img src="image/bar.png" alt="" class="bar">
+        </div>
+
+        <form action="./backend/search.php" method="post" id="myform">
+    <label for="search">Search</label>
+    <input type="text" id="search" name="ser" required>
+    <button type="submit" id="find">Find</button>
+</form>
+    </div>
+
+    <form id="editForm" method="post">
+        <label>Profile Image: <input type="file" id="imgInput" accept="image/*"></label>
+        <label>Name: <input type="text" id="nameInput"></label>
+        <label>Job: <input type="text" id="jobInput"></label>
+        <label>ID: <input type="text" id="idInput"></label>
+        <label>Join Date: <input type="date" id="jdateInput"></label>
+        <label>Number: <input type="text" id="numInput"></label>
+        <label>Barcode Image: <input type="file" id="barInput" accept="image/*"></label>
+        <button type="submit">Save</button>
+    </form>
+
+
+</body>
+
+</html>

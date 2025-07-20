@@ -1,0 +1,33 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    height: 100vh;
+    display: grid;
+    place-items: center;
+    grid-template-columns: 1fr 1fr;
+
+}
+#id {
+    width: 300px;
+    height: 25vw;
+    border-radius: 10px;
+    background-image: linear-gradient(to bottom, #e36c4e, #ffffff, #deb5ab);
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    place-items: center;
+}
+#img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+#fpart{
+    margin-top: 30px;
+}
+#spart{
+    text-align: center;
+}
