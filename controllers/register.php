@@ -1,5 +1,5 @@
 <?php
-    include './database/db.php';
+    include '../database/db.php';
 
     //user create
     $fullname = $_POST['fullname'] ?? '';
@@ -35,7 +35,7 @@
             $user_role_execution_query->bind_param('ii', $user_id, $role_id);
             $user_role_execution_query->execute();
 
-            header('Location: /collab-training/login.html');
+            header('Location: /collab-training/login.php');
             exit;
         } else {
             echo "User Role not found.";

@@ -21,7 +21,7 @@
             </div>
           </div>
 
-          <form action="/collab-training/backend/userCreate.php" method="POST" id="register-form">
+          <form action="/collab-training/controllers/register.php" method="POST" id="register-form">
 
             <div class="form-row">
               <div class="form-group">
@@ -96,14 +96,13 @@
               <button type="submit" id="my_button">Register</button>
             </div>
 
-
           </form>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- <script src="public/js/validateform.js" type="module"></script> -->
+  <script src="./public/js/validateform.js" type="module"></script>
 </body>
 
 </html>
