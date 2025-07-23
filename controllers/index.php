@@ -1,6 +1,9 @@
 <?php 
     include __DIR__. '/../database/db.php';
 
+    $db = new Database();
+    $connection = $db->getConnection();
+
     $loggedInUser = $_SESSION['user'] ?? null;
 
     if ($loggedInUser === null) {
@@ -16,5 +19,4 @@
     if ($result) {
         $users = $result->fetch_all(MYSQLI_ASSOC);
     }
-
 ?>

@@ -21,7 +21,7 @@
             </div>
           </div>
 
-          <form action="/collab-training/controllers/register.php" method="POST" id="register-form">
+          <form action="/collab-training/controllers/AuthController.php?action=register" method="POST" id="register-form">
 
             <div class="form-row">
               <div class="form-group">
