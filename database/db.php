@@ -3,9 +3,9 @@ $host = 'localhost';
 $user = 'root';
 $password = '';
 $db = 'test';
-$port = 3310;
+// $port = 3310;
 
-$connection = new mysqli($host, $user, $password, $db, $port);
+$connection = new mysqli($host, $user, $password, $db);
 if ($connection->connect_error) {
     die("connection fail:" . $connection->connect_error);
 }

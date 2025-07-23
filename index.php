@@ -9,7 +9,7 @@ if (isset($_GET['page'])) {
 $user = $_SESSION['user'] ?? null;
 if ($user === null) {
   $_SESSION['error'] = "Please log-in first bro";
-  header('Location: /collab-training/login.php');
+  header('Location: collab-training/login.php');
   exit;
 }
 ?>

@@ -1,10 +1,17 @@
-<?php
-    include '../collab-training/controllers/edit.php';
+
+    <?php
+$path = __DIR__ . '/../../controllers/edit.php';
+if (!file_exists($path)) {
+    echo "File not found: $path";
+} else {
+    include($path);
+}
 ?>
+
 
 <h1>Edit User</h1>
 
-<form action="#" method="POST">
+<form action="../../controllers/edit.php" method="GET">
     <input type="text" name="id" value="<?php echo $user['id'] ?> " hidden>
     <div class="mb-3">
         <label for="fullname" class="form-label">Full Name</label>

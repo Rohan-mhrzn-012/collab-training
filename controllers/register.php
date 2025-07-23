@@ -15,7 +15,11 @@
     $rawQuery = "INSERT INTO users (fullname, username, email, phone_number, password, gender, agreed_to_terms)
                     VALUES (?, ?, ?, ?, ?, ?, ?)";
     $executionQuery = $connection->prepare($rawQuery);
-    $executionQuery->bind_param('ssssssi',  $fullname, $username, $email,$phoneNumber,$passwordHash, $gender, $agree);
+    //check if there is error
+    if (!$executionQuery) {
+    die("Prepare failed: " . $connection->error);
+}
+    $executionQuery->bind_param('ssssssi',  $fullname, $username, $email, $phoneNumber, $passwordHash, $gender, $agree);
     //user create end
 
     //created user role assigned

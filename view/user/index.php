@@ -1,5 +1,12 @@
 <?php
-    include '../collab-training/controllers/index.php';
+    include '../../controllers/index.php';
+    $page = $_GET['page'] ?? 'home';
+
+switch ($page) {
+    case 'edit-user':
+        include 'edit.php';
+        return;
+    }
 ?>
 
 <h1>Users</h1>

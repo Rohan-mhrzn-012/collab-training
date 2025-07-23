@@ -1,6 +1,6 @@
 <?php 
     include __DIR__. '/../database/db.php';
-
+    session_start();
     $loggedInUser = $_SESSION['user'] ?? null;
 
     if ($loggedInUser === null) {
