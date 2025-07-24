@@ -4,7 +4,7 @@
 
 <h1>Edit User</h1>
 
-<form action="#" method="POST">
+<form action="/../collab-training/controllers/AuthController.php?action=edit" method="POST">
     <input type="text" name="id" value="<?php echo $user['id'] ?> " hidden>
     <div class="mb-3">
         <label for="fullname" class="form-label">Full Name</label>
