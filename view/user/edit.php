@@ -15,17 +15,17 @@ if (!file_exists($path)) {
     <input type="text" name="id" value="<?php echo $user['id'] ?> " hidden>
     <div class="mb-3">
         <label for="fullname" class="form-label">Full Name</label>
-        <input type="text" class="form-control" id="fullname" name="fullname" value="<?php echo $user['fullname'] ?>" required>
+        <input type="text" class="form-control" id="fullname" name="fullname" value="<?php echo $user['fullname'] ?>" >
     </div>
     
     <div class="mb-3">
         <label for="username" class="form-label">Username</label>
-        <input type="text" class="form-control" id="username" name="username" value="" required>
+        <input type="text" class="form-control" id="username" name="username" value="" >
     </div>
 
     <div class="mb-3">
         <label for="email" class="form-label">Email</label>
-        <input type="email" class="form-control" id="email" name="email" value="" required>
+        <input type="email" class="form-control" id="email" name="email" value="" >
     </div>
 
     <div class="mb-3">
@@ -42,5 +42,5 @@ if (!file_exists($path)) {
         </select>
     </div>
 
-    <button type="submit" class="btn btn-primary">Update User</button>
+    <button type="submit" class="btn btn-primary" name = "submit" value='submit'>Update User</button>
 </form>

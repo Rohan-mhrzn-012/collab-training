@@ -32,4 +32,7 @@
             exit;
         }
     }
+    else{
+        header('Location: /collab-training/login.php');
+    }
 ?>
