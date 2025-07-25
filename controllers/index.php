@@ -7,7 +7,7 @@
     $loggedInUser = $_SESSION['user'] ?? null;
 
     if ($loggedInUser === null) {
-        header("Location: /collab-training/login.php");
+        header("Location: /core_php/collab-training/login.php");
         exit;
     }
 

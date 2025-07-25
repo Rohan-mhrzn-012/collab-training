@@ -17,7 +17,7 @@ class AuthController {
     
         if (empty($email) || empty($password)) {
             $_SESSION['error'] = 'Email or password is required.';
-            header('Location: /collab-training/login.php');
+            header('Location: /core_php/collab-training/login.php');
             exit;
         }
     
@@ -38,11 +38,11 @@ class AuthController {
                     "fullname" => $user['fullname'],
                     "username" => $user['username'],
                 ];
-                header('Location: /collab-training/index.php?page=dashboard');
+                header('Location: /core_php/collab-training/index.php?page=dashboard');
                 exit;
             }   else {
                 $_SESSION['error'] = "Invalid Username Or Password.";
-                header('Location: /collab-training/login.php');
+                header('Location: /core_php/collab-training/login.php');
                 exit;
             }
         }
@@ -83,7 +83,7 @@ class AuthController {
                 $user_role_execution_query->bind_param('ii', $user_id, $role_id);
                 $user_role_execution_query->execute();
 
-                header('Location: /collab-training/login.php');
+                header('Location: /core_php/collab-training/login.php');
                 exit;
             } else {
                 echo "User Role not found.";
@@ -98,7 +98,7 @@ class AuthController {
     
         session_destroy();
     
-        header("Location: /collab-training/login.php");
+        header("Location: /core_php/collab-training/login.php");
         exit;
     }
 }

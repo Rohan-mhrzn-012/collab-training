@@ -4,7 +4,7 @@
 
   $user = $_SESSION['user'] ?? null;
   if ($user) {
-    header('Location: /collab-training/index.php');
+    header('Location: /core_php/collab-training/index.php');
   }
 ?>
 
@@ -18,7 +18,7 @@
 <body>
   <h1></h1><?php echo $errors ?></h1>
   <h2>Login</h2>
-  <form action="/collab-training/controllers/AuthController.php?action=login" method="POST" class="login-container">
+  <form action="/core_php/collab-training/controllers/AuthController.php?action=login" method="POST" class="login-container">
     <label for="email">email:</label><br>
     <input type="text" id="email" name="email"><br><br>
 
