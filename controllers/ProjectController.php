@@ -23,14 +23,21 @@ class ProjectController
     }
 
     public function edit() {
-        $project_id=$_GET["id"];
-        $query="SELECT * from projects where project_id=?";
-        $prepare_stmt=$this->connection->prepare($query);
-        $prepare_stmt->bind_param("i",$project_id);
-        $prepare_stmt->execute();
-        $result=$prepare_stmt->get_result();
-        $edit_data=$result->fetch_assoc();
-        return $edit_data;
+        if($_SERVER["REQUEST_METHOD"]==="POST"&& isset($_GET["id"])){
+            $project_id=$_GET["id"];      
+        //updating in the database
+        $project_name=$_POST["project_name"];
+        $project_description=$_POST["project_description"];
+        $start_date=$_POST["start_date"];
+        $end_date=$_POST["end_date"];
+        $status=$_POST["status"];
+        $query="UPDATE projects SET project_name=?, description=?,start_date=?,end_date=?, status=? where project_id=?";
+        $stmt=$this->connection->prepare($query);
+        $stmt->bind_param("sssssi",$project_name,$project_description,$start_date,$end_date,$status,$project_id);
+        $stmt->execute();
+        header("Location:/core_php/collab-training/index.php?page=edit_project&id=".$project_id);
+        exit();
+        }       
     }
 
     public function view()
@@ -51,10 +58,10 @@ class ProjectController
     public function delete() {}
 }
 
-$page = $_GET["page"];
+
 $project_obj = new ProjectController;
 
-if ($page === "projects") {
+
     $action = $_GET["action"] ?? null;
     switch ($action) {
         case "view":
@@ -67,4 +74,4 @@ if ($page === "projects") {
             $project_obj->delete();
             break;
     }
-}
+
