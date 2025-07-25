@@ -14,6 +14,9 @@ $projects = $project_obj->index();
     td {
         border: 2px solid black;
     }
+    tr:hover {
+        background-color: #837f7fff;
+    }
 
     th {
         background-color: #5a5e5aff;
@@ -56,7 +59,7 @@ $projects = $project_obj->index();
                 <td><?php echo $project["start_date"]; ?></td>
                 <td><?php echo $project["end_date"]; ?></td>
                 <td><?php echo $project["status"]; ?></td>
-                <td><a href="#">Edit</a>
+                <td><a href="/core_php/collab-training/index.php?page=edit_project&id=<?php echo$project["project_id"]?>">Edit</a>
                 <a href="/core_php/collab-training/index.php?page=view_project&id=<?php echo $project["project_id"]?>">View</a>
                 <a href="#">Delete</a></td>
             </tr>            

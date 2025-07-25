@@ -1,10 +1,10 @@
 <?php include __DIR__ . "/../../controllers/ProjectController.php";
 $project_obj = new ProjectController;
-$view_data=$project_obj->view();
+$view_data = $project_obj->view();
 
 ?>
 <!-- <link href="/public/css/my_style.css" rel="stylesheet"> -->
- <style>
+<style>
     h1 {
         font-family: Verdana, Geneva, Tahoma, sans-serif;
     }
@@ -21,11 +21,10 @@ $view_data=$project_obj->view();
         color: white;
         width: 30%;
     }
-    tr:hover{
+
+    tr:hover {
         background-color: #565555ff;
     }
-
-   
 
     th,
     td {
@@ -37,30 +36,30 @@ $view_data=$project_obj->view();
     }
 </style>
 
-<h2><?php echo $view_data["project_name"]."'s"?> Information</h2>
+<h2><?php echo $view_data["project_name"] . "'s" ?> Information</h2>
 
 <table>
-    
+
     <tbody>
         <tr>
             <th>Project Name</th>
-            <td><?php echo $view_data["project_name"]?> </td>
+            <td><?php echo $view_data["project_name"] ?> </td>
         </tr>
-         <tr>
+        <tr>
             <th>Project Description</th>
-            <td><?php echo $view_data["description"]?> </td>
+            <td><?php echo $view_data["description"] ?> </td>
         </tr>
-         <tr>
+        <tr>
             <th>Start Date</th>
-            <td><?php echo $view_data["start_date"]?> </td>
+            <td><?php echo $view_data["start_date"] ?> </td>
         </tr>
         <tr>
             <th>End Date</th>
-            <td><?php echo $view_data["end_date"]?> </td>
+            <td><?php echo $view_data["end_date"] ?> </td>
         </tr>
         <tr>
             <th>Status</th>
-            <td><?php echo $view_data["status"]?> </td>
+            <td><?php echo $view_data["status"] ?> </td>
         </tr>
     </tbody>
 </table>

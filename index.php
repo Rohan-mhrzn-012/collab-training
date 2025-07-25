@@ -41,6 +41,8 @@ if ($user === null) {
       <?php include_once "./view/projects/index.php"; ?>
     <?php elseif ($page === "view_project"):?>
       <?php include_once "./view/projects/view.php"; ?>
+    <?php elseif ($page === "edit_project"):?>
+      <?php include_once "./view/projects/edit.php"; ?>
     <?php else: ?>
       <h1>Page not found</h1>
     <?php endif; ?>

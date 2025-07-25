@@ -22,7 +22,16 @@ class ProjectController
         return $projects;
     }
 
-    public function edit() {}
+    public function edit() {
+        $project_id=$_GET["id"];
+        $query="SELECT * from projects where project_id=?";
+        $prepare_stmt=$this->connection->prepare($query);
+        $prepare_stmt->bind_param("i",$project_id);
+        $prepare_stmt->execute();
+        $result=$prepare_stmt->get_result();
+        $edit_data=$result->fetch_assoc();
+        return $edit_data;
+    }
 
     public function view()
     {
@@ -36,7 +45,7 @@ class ProjectController
 
         return $view_data;
 
-        header("Location: /core_php/collab_training/view/projects/view.php?page=view_project");
+        // header("Location: /core_php/collab_training/view/projects/view.php?page=view_project");
     }
 
     public function delete() {}

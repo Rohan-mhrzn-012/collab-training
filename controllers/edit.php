@@ -5,7 +5,7 @@
 
     // check if user is signed-in
     if ($loggedInUser === null) {
-        header("Location: /collab-training/login.php");
+        header("Location: /core_php/collab-training/login.php");
         exit;
     }
     // check if user is signed-in end
