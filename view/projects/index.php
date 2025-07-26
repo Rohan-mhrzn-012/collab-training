@@ -61,12 +61,11 @@ $projects = $project_obj->index();
                 <td><?php echo $project["status"]; ?></td>
                 <td><a href="/core_php/collab-training/index.php?page=edit_project&id=<?php echo$project["project_id"]?>">Edit</a>
                 <a href="/core_php/collab-training/index.php?page=view_project&id=<?php echo $project["project_id"]?>">View</a>
-                <a href="#">Delete</a></td>
+                <a href="/core_php/collab-training/controllers/ProjectController.php?action=delete&project_id=<?php echo $project["project_id"]?>" onclick="return confirm('Are you sure you want to delete this project?')">Delete</a></td>
             </tr>            
         <?php endforeach ?>
     </tbody>
-    <tfoot>
-
+    <tfoot>            
     </tfoot>
 </table>
 
