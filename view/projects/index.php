@@ -36,11 +36,27 @@ $projects = $project_obj->index();
     tr:nth-child(even) {
         background-color: #b5adadff;
     }
+    #insert{
+        border:2px solid black;
+        width: 20%;
+        text-align: center;
+        padding: 5px;
+        margin: 5px;
+        border-radius: 5px;        
+    }
+    a{
+        text-decoration: none;
+        color:#273043;
+        
+    }
+    a:hover{
+        color:#9197ae;
+    }
     
 </style>
 
-<div>
-    <h1>PROJECTS</h1>
+<h1>PROJECTS</h1>
+<div id="insert">    
     <a href="/core_php/collab-training/index.php?page=create_project&action=create">Insert New Project</a>
 </div>
 
@@ -57,7 +73,7 @@ $projects = $project_obj->index();
         </tr>
     </thead>
     <tbody>
-        <?php foreach ($projects as $project): ?>
+        <?php foreach ($projects["project_data"] as $project): ?>
             <tr>
                 <td><?php echo $project["project_id"]; ?></td>
                 <td><?php echo $project["project_name"]; ?></td>
@@ -75,4 +91,27 @@ $projects = $project_obj->index();
     <tfoot>
 
     </tfoot>
+</table>
+
+<h2>INNER JOIN on projects and users</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Project ID</th>
+            <th>Project Name</th>
+            <th>Full Name</th>
+        </tr>
+
+    </thead>
+    <tbody>
+
+        <?php foreach ($projects["join_data"] as $project): ?>
+            <tr>
+                <td><?php echo $project["project_id"]; ?></td>
+                <td><?php echo $project["project_name"]; ?></td>
+                <td><?php echo $project["fullname"]; ?></td>
+            </tr>
+        <?php endforeach ?>
+
+    </tbody>
 </table>
