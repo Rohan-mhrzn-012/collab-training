@@ -25,29 +25,7 @@ $prepareStatement->execute();
 $result = $prepareStatement->get_result();
 $user = $result->fetch_assoc();
 
-// if ($result && $result->num_rows === 1 && $_SERVER['REQUEST_METHOD'] === 'GET' ) {
-//     $name = isset($_GET["fullname"]) && !empty(trim($_GET["fullname"])) ? trim($_GET["fullname"]) : $user['fullname'];
-//     $uname = $_GET["username"];
-//     $email = $_GET["email"];
-//     $pno = $_GET["phone_number"];
-//     $gen = $_GET["gender"];
 
-//     $updateuser = "UPDATE users SET fullname = ?, username = ?, email =?, gender = ?, phone_number = ? WHERE id = ?";
-//     $stmt = $connection->prepare($updateuser);
-//     if ($stmt === null) {
-//         die("Connection error" . $connection->error);
-//     }
-//     $stmt->bind_param(
-//         "ssssii",
-//         $name,
-//         $uname,
-//         $email,
-//         $gen,
-//         $pno,
-//         $userid
-//     );
-//     $stmt->execute();
-// }
 
 if ($result && $result->num_rows === 1 && $_SERVER['REQUEST_METHOD'] === 'GET') {
     $name  = !empty($_GET['fullname']) ? $_GET['fullname'] : $user['fullname'];

@@ -1,5 +1,5 @@
 <?php
-    include '../../controllers/index.php';
+    include __DIR__. '/../../controllers/index.php';
     $page = $_GET['page'] ?? 'home';
 
 switch ($page) {
@@ -7,6 +7,8 @@ switch ($page) {
         include 'edit.php';
         return;
     }
+    $session_user = $_SESSION['user'] ?? null;
+    var_dump($session_user);
 ?>
 
 <h1>Users</h1>
@@ -28,12 +30,15 @@ switch ($page) {
                     <a href="./index.php?page=view-user&id=<?php echo $user['id'] ?>" class="btn btn-info btn-sm me-1">
                         <i class="bi bi-eye"></i> View
                     </a>
-                    <a href="#" class="btn btn-danger btn-sm" 
-                       onclick="return confirm('Are you sure you want to delete this user?')">
+                    <?php if(in_array("Admin", $session_user["user_roles"])){?>
+                    <a class="btn btn-danger btn-sm" 
+                       onclick="return deleteUser(<?php echo $user['id']?>, this)">
                         <i class="bi bi-trash"></i> Delete
                     </a>
+                    <?php } ?>
                 </td>
         </tr>
         <?php endforeach ?>   
     </tbody>
 </table>
+<script src="/../collab-training/public/js/deleteUser.js"></script>

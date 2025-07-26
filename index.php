@@ -31,7 +31,7 @@ if ($user === null) {
   <?php if ($page === 'dashboard'): ?>
     <h1>Dashboard</h1>
     <p>Welcome to the dashboard page.</p>
-  <?php elseif ($page === 'user-index'): ?>
+  <?php elseif ($page === 'users'): ?>
     <?php include_once './view/user/index.php'; ?>
   <?php elseif ($page === 'edit-user'): ?>
     <?php include_once './view/user/edit.php'; ?>
