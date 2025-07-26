@@ -39,6 +39,8 @@ if ($user === null) {
       <?php include_once './view/user/edit.php'; ?>
     <?php elseif ($page === "projects"): ?>
       <?php include_once "./view/projects/index.php"; ?>
+    <?php elseif ($page ==="create_project"):?>
+      <?php include_once "./view/projects/create.php";?>
     <?php elseif ($page === "view_project"):?>
       <?php include_once "./view/projects/view.php"; ?>
     <?php elseif ($page === "edit_project"):?>

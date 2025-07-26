@@ -22,6 +22,23 @@ class ProjectController
         return $projects;
     }
 
+    public function create(){
+        if($_SERVER["REQUEST_METHOD"]==="POST"){            
+        $project_name=$_POST["project_name"];
+        $project_description=$_POST["project_description"];
+        $start_date=$_POST["start_date"];
+        $end_date=$_POST["end_date"];
+        $status=$_POST["status"];
+        $query="INSERT into projects (project_name, description, start_date, end_date,status) values(?,?,?,?,?)";
+        $stmt=$this->connection->prepare($query);
+        $stmt->bind_param("sssss",$project_name,$project_description,$start_date,$end_date,$status);
+        $stmt->execute();
+        header("Location:/core_php/collab-training/index.php?page=projects");
+        exit();
+        } 
+
+    }
+
     public function edit() {
         if($_SERVER["REQUEST_METHOD"]==="POST"&& isset($_GET["id"])){
             $project_id=$_GET["id"];      
@@ -73,6 +90,9 @@ $project_obj = new ProjectController;
 
     $action = $_GET["action"] ?? null;
     switch ($action) {
+        case "create":
+            $project_obj->create();
+            break;
         case "view":
             $project_obj->view();
             break;

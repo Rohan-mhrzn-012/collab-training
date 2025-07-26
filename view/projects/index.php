@@ -14,6 +14,7 @@ $projects = $project_obj->index();
     td {
         border: 2px solid black;
     }
+
     tr:hover {
         background-color: #837f7fff;
     }
@@ -35,9 +36,14 @@ $projects = $project_obj->index();
     tr:nth-child(even) {
         background-color: #b5adadff;
     }
+    
 </style>
 
-<h1>PROJECTS</h1>
+<div>
+    <h1>PROJECTS</h1>
+    <a href="/core_php/collab-training/index.php?page=create_project&action=create">Insert New Project</a>
+</div>
+
 <table>
     <thead>
         <tr>
@@ -59,13 +65,14 @@ $projects = $project_obj->index();
                 <td><?php echo $project["start_date"]; ?></td>
                 <td><?php echo $project["end_date"]; ?></td>
                 <td><?php echo $project["status"]; ?></td>
-                <td><a href="/core_php/collab-training/index.php?page=edit_project&id=<?php echo$project["project_id"]?>">Edit</a>
-                <a href="/core_php/collab-training/index.php?page=view_project&id=<?php echo $project["project_id"]?>">View</a>
-                <a href="/core_php/collab-training/controllers/ProjectController.php?action=delete&project_id=<?php echo $project["project_id"]?>" onclick="return confirm('Are you sure you want to delete this project?')">Delete</a></td>
-            </tr>            
+                <td><a href="/core_php/collab-training/index.php?page=edit_project&id=<?php echo $project["project_id"] ?>">Edit</a>
+                    <a href="/core_php/collab-training/index.php?page=view_project&id=<?php echo $project["project_id"] ?>">View</a>
+                    <a href="/core_php/collab-training/controllers/ProjectController.php?action=delete&project_id=<?php echo $project["project_id"] ?>" onclick="return confirm('Are you sure you want to delete this project?')">Delete</a>
+                </td>
+            </tr>
         <?php endforeach ?>
     </tbody>
-    <tfoot>            
+    <tfoot>
+
     </tfoot>
 </table>
-
