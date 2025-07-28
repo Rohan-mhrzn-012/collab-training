@@ -65,6 +65,7 @@ $projects = $project_obj->index();
         <tr>
             <th>Project_id</th>
             <th>Project Name</th>
+            <th>User Name</th>
             <th>Project Description</th>
             <th>Start Date</th>
             <th>End Date</th>
@@ -77,6 +78,7 @@ $projects = $project_obj->index();
             <tr>
                 <td><?php echo $project["project_id"]; ?></td>
                 <td><?php echo $project["project_name"]; ?></td>
+                <td><?php echo $project["fullname"]; ?></td>
                 <td><?php echo $project["description"]; ?></td>
                 <td><?php echo $project["start_date"]; ?></td>
                 <td><?php echo $project["end_date"]; ?></td>
@@ -93,25 +95,3 @@ $projects = $project_obj->index();
     </tfoot>
 </table>
 
-<h2>INNER JOIN on projects and users</h2>
-<table>
-    <thead>
-        <tr>
-            <th>Project ID</th>
-            <th>Project Name</th>
-            <th>Full Name</th>
-        </tr>
-
-    </thead>
-    <tbody>
-
-        <?php foreach ($projects["join_data"] as $project): ?>
-            <tr>
-                <td><?php echo $project["project_id"]; ?></td>
-                <td><?php echo $project["project_name"]; ?></td>
-                <td><?php echo $project["fullname"]; ?></td>
-            </tr>
-        <?php endforeach ?>
-
-    </tbody>
-</table>

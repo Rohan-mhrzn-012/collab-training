@@ -1,6 +1,8 @@
 <?php 
     include __DIR__ . "/../../controllers/ProjectController.php";
-    $create_obj=new ProjectController;   
+    include __DIR__ . "/../../controllers/userController.php";
+    $create_obj=new UserController;  
+    $datas=$create_obj->getAllUsers();
     
 ?>
 <style>
@@ -35,5 +37,11 @@
     <input type="date" id="end_date" name="end_date" value="">
     <label for="status">Project Status:</label>
     <input type="text" id="status" name="status" value="" placeholder="Enter the project status">
+    <select name="username" id="username">
+         <option value=""> Select a username </option>
+        <?php foreach($datas as $data): ?>
+        <option value="<?php echo $data["username"];?>" name=""><?php echo $data["username"];?></option>
+        <?php endforeach ?>
+    </select>
     <button type="submit" id="update_btn">Add new Project details</button>
 </form>

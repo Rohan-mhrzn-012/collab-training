@@ -12,7 +12,8 @@ class ProjectController
 
     public function index()
     {
-        $query = "SELECT * FROM projects";
+        $query = "SELECT projects.*,users.fullname FROM projects 
+            INNER JOIN users on projects.user_id=users.id";
         $result = $this->connection->query($query);
 
         $projects = [];
@@ -21,31 +22,31 @@ class ProjectController
         }
         // return $projects;
 
-        $join_query = "SELECT project_id, project_name, fullname 
-                        FROM projects
-                        INNER JOIN users ON projects.user_id = users.id;";
-        $join_result=$this->connection->query($join_query);
-        $join_data=[];
-        if($join_result){
-            $join_data=$join_result->fetch_all(MYSQLI_ASSOC);
-        }
-        // return $join_data;
         return["project_data"=> $projects,
-            "join_data"=>$join_data,
+            
         ];    
     }
 
     public function create()
     {
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
+            $username=$_POST["username"];
+            $id_query="SELECT * from users where username=?";
+            $prepare_statement=$this->connection->prepare($id_query);
+            $prepare_statement->bind_param("s",$username);
+            $prepare_statement->execute();
+            $id=$prepare_statement->get_result();
+            $row=$id->fetch_assoc();
+            $user_id=$row["id"];
+
             $project_name = $_POST["project_name"];
             $project_description = $_POST["project_description"];
             $start_date = $_POST["start_date"];
             $end_date = $_POST["end_date"];
             $status = $_POST["status"];
-            $query = "INSERT into projects (project_name, description, start_date, end_date,status) values(?,?,?,?,?)";
+            $query = "INSERT into projects (project_name, description, start_date, end_date,status,user_id) values(?,?,?,?,?,?)";
             $stmt = $this->connection->prepare($query);
-            $stmt->bind_param("sssss", $project_name, $project_description, $start_date, $end_date, $status);
+            $stmt->bind_param("sssssi", $project_name, $project_description, $start_date, $end_date, $status,$user_id);
             $stmt->execute();
             header("Location:/core_php/collab-training/index.php?page=projects");
             exit();
@@ -97,6 +98,8 @@ class ProjectController
         header("Location:/core_php/collab-training/index.php?page=delete_project");
         exit();
     }
+
+    
 }
 
 
