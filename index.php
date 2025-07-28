@@ -32,7 +32,7 @@ if ($user === null) {
   <div class="content">
     <?php if ($page === 'dashboard'): ?>
       <h1>Dashboard</h1>
-      <p>Welcome to the dashboard page.</p>
+      <p><?php echo $user["fullname"].", ";?>Welcome to the dashboard page.</p>      
     <?php elseif ($page === 'users'): ?>
       <?php include_once './view/user/index.php'; ?>
     <?php elseif ($page === 'edit-user'): ?>
