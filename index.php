@@ -32,25 +32,26 @@ if ($user === null) {
   <div class="content">
     <?php if ($page === 'dashboard'): ?>
       <h1>Dashboard</h1>
-      <p><?php echo $user["fullname"].", ";?>Welcome to the dashboard page.</p>      
+      <p><?php echo $user["fullname"] . ", "; ?>Welcome to the dashboard page.</p>
     <?php elseif ($page === 'users'): ?>
       <?php include_once './view/user/index.php'; ?>
     <?php elseif ($page === 'edit-user'): ?>
       <?php include_once './view/user/edit.php'; ?>
     <?php elseif ($page === "projects"): ?>
       <?php include_once "./view/projects/index.php"; ?>
-    <?php elseif ($page ==="create_project"):?>
-      <?php include_once "./view/projects/create.php";?>
-    <?php elseif ($page === "view_project"):?>
+    <?php elseif ($page === "create_project"): ?>
+      <?php include_once "./view/projects/create.php"; ?>
+    <?php elseif ($page === "view_project"): ?>
       <?php include_once "./view/projects/view.php"; ?>
-    <?php elseif ($page === "edit_project"):?>
+    <?php elseif ($page === "edit_project"): ?>
       <?php include_once "./view/projects/edit.php"; ?>
-    <?php elseif ($page==="delete_project"):?>
-      <?php include_once "./view/projects/index.php";?>
+    <?php elseif ($page === "delete_project"): ?>
+      <?php include_once "./view/projects/index.php"; ?>
     <?php else: ?>
       <h1>Page not found</h1>
     <?php endif; ?>
   </div>
+
 
   <!-- Bootstrap JS Bundle -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

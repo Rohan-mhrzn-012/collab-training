@@ -103,6 +103,15 @@ class AuthController {
     }
 }
 
+$logout_action=$_GET['action'];
+if($logout_action=='logout'){
+    $logout_obj=new AuthController;
+    $logout_obj->logout();
+}
+
+
+
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $action = $_GET['action'] ?? 'login';
 
