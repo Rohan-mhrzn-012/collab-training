@@ -10,17 +10,12 @@ class AuthController {
         $this->connection = $db->getConnection();
     }
 
-    public function login(){
+    public function login($email, $password){
         session_start();
-        $email = $_POST['email'] ?? '';
-        $password = $_POST['password'] ?? '';
-    
         if (empty($email) || empty($password)) {
-            $_SESSION['error'] = 'Email or password is required.';
-            header('Location: /collab-training/login.php');
-            exit;
+            return ['success'=> false, "message" => "Email or password is required."];
         }
-    
+
         $query = "SELECT * FROM users WHERE email = ?";
         $prepareStatement = $this->connection->prepare($query);
         $prepareStatement->bind_param('s', $email);
@@ -38,12 +33,9 @@ class AuthController {
                     "fullname" => $user['fullname'],
                     "username" => $user['username'],
                 ];
-                header('Location: /collab-training/index.php?page=dashboard');
-                exit;
+                return ['success'=> true, "message" => "Logged in successfully."];
             }   else {
-                $_SESSION['error'] = "Invalid Username Or Password.";
-                header('Location: /collab-training/login.php');
-                exit;
+                return ['success'=> false, "message" => "Invalid Username Or Password."];
             }
         }
     }
@@ -100,25 +92,6 @@ class AuthController {
     
         header("Location: /collab-training/login.php");
         exit;
-    }
-}
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $action = $_GET['action'] ?? 'login';
-
-    $controller = new AuthController;
-
-    switch ($action) {
-        case 'login':
-            $controller->login();
-            break;
-        case 'register':
-            $controller->register();
-            break;
-        
-        default:
-            $controller->login();
-            break;
     }
 }
 ?>

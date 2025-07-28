@@ -10,7 +10,7 @@
       <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
         <li><a class="dropdown-item" href="profile.php">Profile</a></li>
         <li><hr class="dropdown-divider"></li>
-        <li><a class="dropdown-item text-danger" href="">Logout</a></li>
+        <li><a class="dropdown-item text-danger" href="/collab-training/router.php?route=auth/logout">Logout</a></li>
       </ul>
     </div>
   </div>
