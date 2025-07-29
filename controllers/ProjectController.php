@@ -73,7 +73,7 @@ class ProjectController
     }
 
     public function view()
-    {
+    {      
         $project_id = $_GET["id"];
         $query = "SELECT * from projects where project_id=?";
         $prepare_stmt = $this->connection->prepare($query);
@@ -103,21 +103,21 @@ class ProjectController
 }
 
 
-$project_obj = new ProjectController;
+// $project_obj = new ProjectController;
 
 
-$action = $_GET["action"] ?? null;
-switch ($action) {
-    case "create":
-        $project_obj->create();
-        break;
-    case "view":
-        $project_obj->view();
-        break;
-    case "edit":
-        $project_obj->edit();
-        break;
-    case "delete":
-        $project_obj->delete();
-        break;
-}
+// $action = $_GET["action"] ?? null;
+// switch ($action) {
+//     case "create":
+//         $project_obj->create();
+//         break;
+//     case "view":
+//         $project_obj->view();
+//         break;
+//     case "edit":
+//         $project_obj->edit();
+//         break;
+//     case "delete":
+//         $project_obj->delete();
+//         break;
+// }

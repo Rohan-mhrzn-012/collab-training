@@ -14,9 +14,9 @@ if ($route === "project") {
         case "edit":
             $project_obj->edit();
             break;
-        case "view":
-            $project_obj->view();
-            break;
+        // case "view":
+        //     $project_obj->view();
+        //     break;
         case "delete":
             $project_obj->view();
             break;

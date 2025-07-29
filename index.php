@@ -47,6 +47,8 @@ if ($user === null) {
       <?php include_once "./view/projects/edit.php"; ?>
     <?php elseif ($page === "delete_project"): ?>
       <?php include_once "./view/projects/index.php"; ?>
+    <?php elseif ($page === 'profile'): ?>
+      <?php include_once './profile.php'; ?>
     <?php else: ?>
       <h1>Page not found</h1>
     <?php endif; ?>

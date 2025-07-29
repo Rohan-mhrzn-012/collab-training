@@ -12,7 +12,7 @@
         <span><?php echo $user["username"];?></span>
       </button>
       <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-        <li><a class="dropdown-item" href="profile.php">Profile</a></li>
+        <li><a class="dropdown-item" href="/core_php/collab-training/index.php?page=profile">Profile</a></li>
         <li><hr class="dropdown-divider"></li>
         <li><a class="dropdown-item text-danger" href="/core_php/collab-training/controllers/AuthController.php?action=logout">Logout</a></li>
       </ul>
