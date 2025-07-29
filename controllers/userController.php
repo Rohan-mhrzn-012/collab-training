@@ -19,6 +19,6 @@ class UserController {
     }
 
     public function delete(){
-
+        return json_encode("message ho yo");
     }
 }

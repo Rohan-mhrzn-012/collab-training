@@ -3,7 +3,7 @@
     <div class="dropdown ms-auto">
       <button class="btn btn-dark dropdown-toggle d-flex align-items-center" type="button" id="userDropdown"
               data-bs-toggle="dropdown" aria-expanded="false">
-        <img src="https://cdn-icons-png.flaticon.com/512/747/747376.png"
+            <img src="public/uploads/profilePicture/<?php echo $user['profile_picture'] ?>"
              alt="User Icon" style="height:32px; width:32px; border-radius:50%; margin-right:8px;">
         <span>user Name</span>
       </button>

@@ -21,7 +21,7 @@
             </div>
           </div>
 
-          <form action="/collab-training/controllers/AuthController.php?action=register" method="POST" id="register-form">
+          <form action="/collab-training/router.php?route=auth/register" method="POST" id="register-form" enctype='multipart/form-data'>
 
             <div class="form-row">
               <div class="form-group">
@@ -80,6 +80,11 @@
                   <option value="female">Female</option>
                   <option value="other">Other</option>
                 </select>
+                <span class="error-section" hidden></span>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="profile_picture">Profile Picture</label>
+                <input type="file" id="profile_picture" name="profile_picture" class="form-control" accept="image/*">
                 <span class="error-section" hidden></span>
               </div>
             </div>

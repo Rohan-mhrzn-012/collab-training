@@ -32,6 +32,7 @@ class AuthController {
                     "email" => $user['email'],
                     "fullname" => $user['fullname'],
                     "username" => $user['username'],
+                    "profile_picture" => $user['profile_picture']
                 ];
                 return ['success'=> true, "message" => "Logged in successfully."];
             }   else {
@@ -52,10 +53,28 @@ class AuthController {
         
         $passwordHash = password_hash($password, PASSWORD_DEFAULT);
 
-        $rawQuery = "INSERT INTO users (fullname, username, email, phone_number, password, gender, agreed_to_terms)
-                        VALUES (?, ?, ?, ?, ?, ?, ?)";
+        $profilePicture = null;
+        if (isset($_FILES['profile_picture'])) {
+            //temporary storage ko path leko
+            $tempName = $_FILES['profile_picture']['tmp_name'];
+
+            //temporary storage bata original name
+            $originalName = basename($_FILES['profile_picture']['name']);
+
+            // tyo file ko extension
+            $extension = pathinfo($originalName, PATHINFO_EXTENSION);
+
+            // teslai euta unique nam deko
+            $profilePicture = uniqid('profile_', true) . '.' . $extension;
+
+            // copy the file to our system
+            $destination = __DIR__ . '/../public/uploads/profilePicture/' . $profilePicture; // tya bhitra k nam ma rakhne
+            move_uploaded_file($tempName, $destination);// temporary bata destination ma copy garcha
+        }
+        $rawQuery = "INSERT INTO users (fullname, username, email, phone_number, password, gender, agreed_to_terms, profile_picture)
+                        VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         $executionQuery = $this->connection->prepare($rawQuery);
-        $executionQuery->bind_param('ssssssi',  $fullname, $username, $email,$phoneNumber,$passwordHash, $gender, $agree);
+        $executionQuery->bind_param('ssssssis',  $fullname, $username, $email,$phoneNumber,$passwordHash, $gender, $agree, $profilePicture);
         //user create end
 
         //created user role assigned

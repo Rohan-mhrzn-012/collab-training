@@ -42,5 +42,27 @@ if ($user === null) {
 
 <!-- Bootstrap JS Bundle -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+    let userIdToDelete = null;
+    
+    $("#delete-user-btn").on("click", function(){
+      userIdToDelete = $(this).data('user-id');
+    });
+
+    $("#confirm-delete").on('click', function(){
+      $.ajax({
+        url: '/collab-training/router.php?route=user/delete',
+        type: 'POST',
+        data: {id: userIdToDelete},
+        dataType: 'json',
+        success: function(response){
+        },
+        error: function(response){
+        }
+      });
+    });
+</script>
+
 </body>
 </html>
