@@ -83,9 +83,10 @@ $projects = $project_obj->index();
                 <td><?php echo $project["start_date"]; ?></td>
                 <td><?php echo $project["end_date"]; ?></td>
                 <td><?php echo $project["status"]; ?></td>
-                <td><a class="btn btn-primary btn-sm me-1" href="/core_php/collab-training/index.php?page=edit_project&id=<?php echo $project["project_id"] ?>">Edit</a>
+                <td>
+                    <a class="btn btn-primary btn-sm me-1" href="/core_php/collab-training/index.php?page=edit_project&id=<?php echo $project["project_id"] ?>">Edit</a>
                     <a class="btn btn-info btn-sm me-1" href="/core_php/collab-training/index.php?page=view_project&id=<?php echo $project["project_id"] ?>">View</a>
-                    <a class="btn btn-danger btn-sm" href="/core_php/collab-training/controllers/ProjectController.php?action=delete&project_id=<?php echo $project["project_id"] ?>" onclick="return confirm('Are you sure you want to delete this project?')">Delete</a>
+                    <a class="btn btn-danger btn-sm" href="/core_php/collab-training/routes.php?route=project&action=delete&project_id=<?php echo $project["project_id"] ?>" onclick="return confirm('Are you sure you want to delete this project?')">Delete</a>
                 </td>
             </tr>
         <?php endforeach ?>

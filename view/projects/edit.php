@@ -26,7 +26,7 @@
 
 <!-- <a href="/core_php/collab-training/controllers/ProjectController.php?id=<?php echo$edit_data["project_id"]?>"></a> -->
 
-<form action="/core_php/collab-training/controllers/ProjectController.php?action=edit&id=<?php echo$edit_data["project_id"]?>" method="POST">
+<form action="/core_php/collab-training/routes.php?route=project&action=edit&id=<?php echo$edit_data["project_id"]?>" method="POST">
     <label for="project name">Project Name:</label>
     <input type="text" id="project_name" name="project_name" value="<?php echo$edit_data["project_name"]?>">
     <label for="project description">Project Description:</label>

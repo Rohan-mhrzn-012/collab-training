@@ -26,7 +26,7 @@
 
 <h1>Create new Project</h1>
 
-<form action="/core_php/collab-training/controllers/ProjectController.php?action=create" method="POST">
+<form action="/core_php/collab-training/routes.php?route=project&action=create" method="POST">
     <label for="project name">Project Name:</label>
     <input type="text" id="project_name" name="project_name" value="" placeholder="Please enter the project name">
     <label for="project description">Project Description:</label>
