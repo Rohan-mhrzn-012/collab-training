@@ -14,7 +14,7 @@ if ($loggedInUser === null) {
 
 $userid = $_GET['id'] ?? "";
 
-$query = "SELECT * FROM users WHERE id = ?";
+$query = "SELECT phone_number FROM users WHERE id = ?";
 $prepareStatement = $connection->prepare($query);
 if (!$prepareStatement) {
     die("Prepare failed: " . $connection->error);
@@ -48,6 +48,7 @@ if ($result && $result->num_rows === 1 && $_SERVER['REQUEST_METHOD'] === 'GET') 
 
     if ($submit === "submit") {
         if ($stmt->affected_rows > 0) {
+            // header('Location: /collab-training/');
             echo "User updated successfully!";
         } else {
             echo "No user updated";

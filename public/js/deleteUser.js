@@ -1,6 +1,6 @@
 function deleteUser(id, el) {
     if (confirm("Are you sure you want to delete user ID " + id + "?")) {
-        fetch('/../collab-training/controllers/delete.php', {
+        fetch('/../collab-training/controllers/userController.php&action=delete', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'

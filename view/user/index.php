@@ -8,7 +8,10 @@ switch ($page) {
         return;
     }
     $session_user = $_SESSION['user'] ?? null;
-    var_dump($session_user);
+    if($session_user === null){
+        echo "No User in db";
+    }
+    // var_dump($session_user);
 ?>
 
 <h1>Users</h1>

@@ -35,6 +35,8 @@ if ($user === null) {
     <?php include_once './view/user/index.php'; ?>
   <?php elseif ($page === 'edit-user'): ?>
     <?php include_once './view/user/edit.php'; ?>
+  <?php elseif ($page === 'user_role'): ?>
+    <?php include_once './view/user/user_role.php'; ?>
   <?php else: ?>
     <h1>Page not found</h1>
   <?php endif; ?>

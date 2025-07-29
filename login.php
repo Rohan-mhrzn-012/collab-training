@@ -19,7 +19,7 @@
 <body>
   <h1></h1><?php echo $errors ?></h1>
   <h2>Login</h2>
-  <form action="/collab-training/controllers/login.php" method="POST" class="login-container">
+  <form action="/collab-training/controllers/AuthController.php?action=login" method="POST" class="login-container">
     <label for="email">email:</label><br>
     <input type="text" id="email" name="email"><br><br>
 

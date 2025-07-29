@@ -1,7 +1,8 @@
-<?php 
+<?php
 include_once __DIR__ . "/../database/db.php";
 
-class AuthController {
+class AuthController
+{
     private $connection;
 
     public function __construct()
@@ -10,22 +11,25 @@ class AuthController {
         $this->connection = $db->getConnection();
     }
 
-    public function login(){
+    public function login()
+    {
         session_start();
+
         $email = $_POST['email'] ?? '';
         $password = $_POST['password'] ?? '';
-    
+
         if (empty($email) || empty($password)) {
             $_SESSION['error'] = 'Email or password is required.';
             header('Location: /collab-training/login.php');
             exit;
         }
-    
-        $query = "SELECT * FROM users WHERE email = ?";
+
+        $query = "SELECT users.password, users.id, users.fullname, users.username, users.email, users.phone_number, GROUP_CONCAT(roles.name) as user_role FROM users 
+        left JOIN user_roles ON user_roles.user_id = users.id left join roles on user_roles.role_id = roles.id WHERE email = ?";
         $prepareStatement = $this->connection->prepare($query);
         $prepareStatement->bind_param('s', $email);
         $prepareStatement->execute();
-    
+
         $result = $prepareStatement->get_result();
 
         if ($result && $result->num_rows > 0) {
@@ -37,18 +41,20 @@ class AuthController {
                     "email" => $user['email'],
                     "fullname" => $user['fullname'],
                     "username" => $user['username'],
+                    "user_roles" => explode(",", $user['user_role'])
                 ];
                 header('Location: /collab-training/index.php?page=dashboard');
                 exit;
-            }   else {
-                $_SESSION['error'] = "Invalid Username Or Password.";
-                header('Location: /collab-training/login.php');
-                exit;
             }
+        } else {
+            header('Location: /collab-training/login.php');
         }
     }
 
-    public function register(){
+
+
+    public function register()
+    {
         //user create
         $fullname = $_POST['fullname'] ?? '';
         $username = $_POST['username'] ?? '';
@@ -57,13 +63,13 @@ class AuthController {
         $password = $_POST['password'] ?? '';
         $gender = $_POST['gender'] ?? '';
         $agree = isset($_POST['agree']) ? 1 : 0;
-        
+
         $passwordHash = password_hash($password, PASSWORD_DEFAULT);
 
         $rawQuery = "INSERT INTO users (fullname, username, email, phone_number, password, gender, agreed_to_terms)
                         VALUES (?, ?, ?, ?, ?, ?, ?)";
         $executionQuery = $this->connection->prepare($rawQuery);
-        $executionQuery->bind_param('ssssssi',  $fullname, $username, $email,$phoneNumber,$passwordHash, $gender, $agree);
+        $executionQuery->bind_param('ssssssi',  $fullname, $username, $email, $phoneNumber, $passwordHash, $gender, $agree);
         //user create end
 
         //created user role assigned
@@ -92,12 +98,13 @@ class AuthController {
         //created user role assigned END
     }
 
-    public function logout(){
+    public function logout()
+    {
         $_SESSION = [];
         unset($_SESSION['user']);
-    
+
         session_destroy();
-    
+
         header("Location: /collab-training/login.php");
         exit;
     }
@@ -115,13 +122,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         case 'register':
             $controller->register();
             break;
-        case 'edit':
-            $controller->edit();
-            break;
+        case 'logout':
+            $controller->logout();
+            break; 
             
         default:
             $controller->login();
             break;
     }
 }
-?>
