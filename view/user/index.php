@@ -1,5 +1,5 @@
 <?php
-    include '../collab-training/controllers/index.php';
+    include '/../collab-training/controllers/index.php';
 ?>
 
 <h1>Users</h1>

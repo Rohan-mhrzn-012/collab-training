@@ -1,4 +1,4 @@
-<?php 
+<!-- <?php 
     include __DIR__. '/../database/db.php';
 
     $loggedInUser = $_SESSION['user'] ?? null;
@@ -19,4 +19,4 @@
 
     $result = $prepareStatement->get_result();
     $user = $result->fetch_assoc();
-?>
+?> -->
