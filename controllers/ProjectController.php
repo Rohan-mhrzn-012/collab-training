@@ -9,6 +9,14 @@ class ProjectController
         $db = new Database;
         $this->connection = $db->getConnection();
     }
+    public function getAllProjects(){
+        $raw_query="SELECT * FROM projects";
+        $query=$this->connection->query($raw_query);
+        // if($query){
+            return $query->fetch_all(MYSQLI_ASSOC);
+        // }
+        // return [];        
+    }
 
     public function index()
     {

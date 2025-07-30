@@ -18,7 +18,7 @@ if ($route === "project") {
         //     $project_obj->view();
         //     break;
         case "delete":
-            $project_obj->view();
+            $project_obj->delete();
             break;
     }
 }

@@ -4,6 +4,16 @@ include __DIR__ . "/../../controllers/userController.php";
 $create_obj = new UserController;
 $datas = $create_obj->getAllUsers();
 
+$status_obj = new ProjectController;
+$projects = $status_obj->getAllProjects();
+
+$statuses = [];
+foreach ($projects as $project) {
+    if (!in_array($project["status"], $statuses)) {
+        $statuses[] = $project["status"];
+    }
+}
+
 ?>
 <style>
     form {
@@ -29,7 +39,7 @@ $datas = $create_obj->getAllUsers();
 
 <h1>Create new Project</h1>
 
-<form action="/core_php/collab-training/routes.php?route=project&action=create" method="POST"  enctype="multipart/form-data">
+<form action="/core_php/collab-training/routes.php?route=project&action=create" method="POST" enctype="multipart/form-data">
     <div class="mb-3">
         <label for="project_name" class="form-label">Project Name:</label>
         <input type="text" class="form-control" name="project_name" id="project_name" placeholder="Enter project name">
@@ -47,13 +57,26 @@ $datas = $create_obj->getAllUsers();
     <label for="end date">End Date:</label>
     <input type="date" id="end_date" name="end_date" value="">
     <label for="status">Project Status:</label>
-    <input type="text" id="status" name="status" value="" placeholder="Enter the project status">
+    <select name="status" id="status">
+        <option value="">Select the project status</option>
+        <?php foreach ($statuses as $status_value): ?>
+            <option value="<?php echo $status_value; ?>"><?php echo $status_value; ?></option>
+        <?php endforeach; ?>
+    </select>
+
+    <!-- <input type="text" id="status" name="status" value="" placeholder="Enter the project status"> -->
+    
+    <label for="Username">User:</label>
     <select name="username" id="username">
         <option value=""> Select a username </option>
         <?php foreach ($datas as $data): ?>
             <option value="<?php echo $data["username"]; ?>" name=""><?php echo $data["username"]; ?></option>
         <?php endforeach ?>
     </select>
-    <input type="file" accept="image/*" name="project_image" id="project_image">
-    <button type="submit" id="update_btn">Add new Project details</button>
+    <div class="mb-3">
+        <label for="project_image" class="form-label"></label>
+        <input class="form-control" type="file" id="formFile" accept="image/*" name="project_image" id="project_image">
+    </div>
+    <!-- <input type="file" accept="image/*" name="project_image" id="project_image"> -->
+    <button type="submit" id="update_btn" class="btn btn-success">Add new Project details</button>
 </form>

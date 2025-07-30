@@ -38,32 +38,31 @@ $view_data = $project_obj->view();
 
 <h2><?php echo $view_data["project_name"] . "'s" ?> Information</h2>
 
-<table>
-
-    <tbody>
-        <tr>
-            <th>Project Name</th>
+<table class="table">  
+  <tbody>
+     <tr>
+            <th class="table-dark">Project Name</th>
             <td><?php echo $view_data["project_name"] ?> </td>
         </tr>
         <tr>
-            <th>Project Description</th>
+            <th class="table-dark">Project Description</th>
             <td><?php echo $view_data["description"] ?> </td>
         </tr>
         <tr>
-            <th>Start Date</th>
+            <th class="table-dark">Start Date</th>
             <td><?php echo $view_data["start_date"] ?> </td>
         </tr>
         <tr>
-            <th>End Date</th>
+            <th class="table-dark">End Date</th>
             <td><?php echo $view_data["end_date"] ?> </td>
         </tr>
         <tr>
-            <th>Status</th>
+            <th class="table-dark">Status</th>
             <td><?php echo $view_data["status"] ?> </td>
         </tr>
         <tr>
-            <th>Image</th>
+            <th class="table-dark">Image</th>
             <td> <img src="/core_php/collab-training/public/uploads/project_images/<?php echo $view_data["project_image"]; ?>" alt="Project Image" width="150"></td>
         </tr>
-    </tbody>
+  </tbody>
 </table>

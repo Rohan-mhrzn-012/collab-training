@@ -60,10 +60,9 @@ $projects = $project_obj->index();
     <a href="/core_php/collab-training/index.php?page=create_project&action=create">Insert New Project</a>
 </div>
 
-<table>
-    <thead>
-        <tr>
-            
+<table class="table">
+  <thead class="table-dark">
+    <tr>            
             <th>Project Name</th>
             <th>User Name</th>
             <th>Project Description</th>
@@ -72,7 +71,8 @@ $projects = $project_obj->index();
             <th>Status</th>
             <th>Actions</th>
         </tr>
-    </thead>
+  </thead>
+  <tbody>
     <tbody>
         <?php foreach ($projects["project_data"] as $project): ?>
             <tr>
@@ -91,8 +91,5 @@ $projects = $project_obj->index();
             </tr>
         <?php endforeach ?>
     </tbody>
-    <tfoot>
-
-    </tfoot>
+  </tbody>
 </table>
-
