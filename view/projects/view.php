@@ -61,5 +61,9 @@ $view_data = $project_obj->view();
             <th>Status</th>
             <td><?php echo $view_data["status"] ?> </td>
         </tr>
+        <tr>
+            <th>Image</th>
+            <td> <img src="/core_php/collab-training/public/uploads/project_images/<?php echo $view_data["project_image"]; ?>" alt="Project Image" width="150"></td>
+        </tr>
     </tbody>
 </table>

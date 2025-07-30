@@ -63,7 +63,7 @@ $projects = $project_obj->index();
 <table>
     <thead>
         <tr>
-            <th>Project_id</th>
+            
             <th>Project Name</th>
             <th>User Name</th>
             <th>Project Description</th>
@@ -76,7 +76,7 @@ $projects = $project_obj->index();
     <tbody>
         <?php foreach ($projects["project_data"] as $project): ?>
             <tr>
-                <td><?php echo $project["project_id"]; ?></td>
+                
                 <td><?php echo $project["project_name"]; ?></td>
                 <td><?php echo $project["fullname"]; ?></td>
                 <td><?php echo $project["description"]; ?></td>

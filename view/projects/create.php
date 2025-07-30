@@ -29,7 +29,7 @@ $datas = $create_obj->getAllUsers();
 
 <h1>Create new Project</h1>
 
-<form action="/core_php/collab-training/routes.php?route=project&action=create" method="POST">
+<form action="/core_php/collab-training/routes.php?route=project&action=create" method="POST"  enctype="multipart/form-data">
     <div class="mb-3">
         <label for="project_name" class="form-label">Project Name:</label>
         <input type="text" class="form-control" name="project_name" id="project_name" placeholder="Enter project name">
@@ -54,5 +54,6 @@ $datas = $create_obj->getAllUsers();
             <option value="<?php echo $data["username"]; ?>" name=""><?php echo $data["username"]; ?></option>
         <?php endforeach ?>
     </select>
+    <input type="file" accept="image/*" name="project_image" id="project_image">
     <button type="submit" id="update_btn">Add new Project details</button>
 </form>

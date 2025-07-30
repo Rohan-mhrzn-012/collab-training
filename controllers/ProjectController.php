@@ -30,6 +30,7 @@ class ProjectController
     public function create()
     {
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
+            //getting user id on the basis of the username selected
             $username=$_POST["username"];
             $id_query="SELECT * from users where username=?";
             $prepare_statement=$this->connection->prepare($id_query);
@@ -39,14 +40,36 @@ class ProjectController
             $row=$id->fetch_assoc();
             $user_id=$row["id"];
 
+            //getting image from create form and giving it temporary name and storing it in the system
+            //name is stored in database but file is temporarily saved in the system
+
+            $project_image = null;
+            if (isset($_FILES["project_image"])) {
+                //accessing the temporary path
+                $tempName= $_FILES["project_image"]["tmp_name"];
+                //getting the actual location
+                
+                $originalName=basename($_FILES["project_image"]["name"]);//basename prevents directory traversal attacks
+                //accessing the file extension like jpg, png
+                $extension=pathinfo($originalName,PATHINFO_EXTENSION);
+                //giving unique name to the image
+                $project_image=uniqid("project_",true).".".$extension;
+
+                //copying to public/uploads/project_images
+                $destination= __DIR__ ."/../public/uploads/project_images/".$project_image;
+                //now the project image will be in our system
+                move_uploaded_file($tempName,$destination);
+
+            }
+
             $project_name = $_POST["project_name"];
             $project_description = $_POST["project_description"];
             $start_date = $_POST["start_date"];
             $end_date = $_POST["end_date"];
             $status = $_POST["status"];
-            $query = "INSERT into projects (project_name, description, start_date, end_date,status,user_id) values(?,?,?,?,?,?)";
+            $query = "INSERT into projects (project_name, description, start_date, end_date,status,user_id,project_image) values(?,?,?,?,?,?,?)";
             $stmt = $this->connection->prepare($query);
-            $stmt->bind_param("sssssi", $project_name, $project_description, $start_date, $end_date, $status,$user_id);
+            $stmt->bind_param("sssssis", $project_name, $project_description, $start_date, $end_date, $status,$user_id,$project_image);
             $stmt->execute();
             header("Location:/core_php/collab-training/index.php?page=projects");
             exit();
