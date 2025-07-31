@@ -71,6 +71,10 @@ class ProjectController
             }
 
             $project_name = $_POST["project_name"];
+
+            if(empty($project_name)){
+                $error = "The project name is empty";
+            }
             $project_description = $_POST["project_description"];
             $start_date = $_POST["start_date"];
             $end_date = $_POST["end_date"];

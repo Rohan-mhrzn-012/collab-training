@@ -31,11 +31,20 @@ $statuses = ['starting', 'ongoing', 'completed'];
 
 <h1>Create new Project</h1>
 
-<form action="/core_php/collab-training/routes.php?route=project&action=create" method="POST" enctype="multipart/form-data">
+<a href="/core_php/collab-training/routes.php?route=project&action=create"></a>
+
+<form action="#" method="POST" enctype="multipart/form-data">
     <div class="mb-3">
         <label for="project_name" class="form-label">Project Name:</label>
         <input type="text" class="form-control" name="project_name" id="project_name" placeholder="Enter project name">
     </div>
+
+    <?php if (!empty($error)):    ?>
+        <div>
+            <?php echo $error; ?>
+        </div>
+    <?php endif ?>
+
     <!-- <label for="project name">Project Name:</label>
     <input type="text" id="project_name" name="project_name" value="" placeholder="Please enter the project name"> -->
     <div class="mb-3">
@@ -57,7 +66,7 @@ $statuses = ['starting', 'ongoing', 'completed'];
     </select>
 
     <!-- <input type="text" id="status" name="status" value="" placeholder="Enter the project status"> -->
-    
+
     <label for="Username">User:</label>
     <select name="username" id="username">
         <option value=""> Select a username </option>
