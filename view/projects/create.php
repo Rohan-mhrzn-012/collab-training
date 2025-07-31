@@ -3,16 +3,8 @@ include __DIR__ . "/../../controllers/ProjectController.php";
 include __DIR__ . "/../../controllers/userController.php";
 $create_obj = new UserController;
 $datas = $create_obj->getAllUsers();
+$statuses = ['starting', 'ongoing', 'completed'];
 
-$status_obj = new ProjectController;
-$projects = $status_obj->getAllProjects();
-
-$statuses = [];
-foreach ($projects as $project) {
-    if (!in_array($project["status"], $statuses)) {
-        $statuses[] = $project["status"];
-    }
-}
 
 ?>
 <style>
