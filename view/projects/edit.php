@@ -51,7 +51,7 @@ $statuses = ['starting', 'ongoing', 'completed'];
     <input type="date" id="end_date" name="end_date" value="<?php echo $edit_data["end_date"] ?>">
 
     <label for="status">Project Status:</label>
-    <select name="status" id="status">
+    <select name="status" id="status" class="form-select" aria-label="Default select example">
         <option value=""><?php echo $edit_data["status"] ?></option>
         <?php foreach ($statuses as $status_value): ?>
             <option value="<?php echo $status_value; ?>"><?php echo $status_value; ?></option>

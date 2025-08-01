@@ -86,10 +86,39 @@ $projects = $project_obj->index();
                 <td>
                     <a class="btn btn-primary btn-sm me-1" href="/core_php/collab-training/index.php?page=edit_project&id=<?php echo $project["project_id"] ?>">Edit</a>
                     <a class="btn btn-info btn-sm me-1" href="/core_php/collab-training/index.php?page=view_project&id=<?php echo $project["project_id"] ?>">View</a>
-                    <a class="btn btn-danger btn-sm" href="/core_php/collab-training/routes.php?route=project&action=delete&project_id=<?php echo $project["project_id"] ?>" onclick="return confirm('Are you sure you want to delete this project?')">Delete</a>
+                    <a class="btn btn-danger btn-sm" data-id="<?php echo $project["project_id"] ?>">Delete</a>
                 </td>
             </tr>
         <?php endforeach ?>
     </tbody>
   </tbody>
 </table>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"> </script>
+
+<script>
+    $(document).ready(function (){
+        $(".btn-danger").click(function (){
+            let id =$(this).data("id");
+
+            if(confirm("Are you sure you want to delete this?")){
+                $.ajax({
+                    url:"/core_php/collab-training/routes.php?route=project&action=delete",
+                    type:"POST",
+                    data: {project_id:id},
+                    success: function(response){
+                        let res = JSON.parse(response);
+                        if(res.status === "success"){
+                            alert("Deletion successful");
+                            location.reload();
+                        }
+                        else{
+                            alert("Deletion failed"+ res.message);
+                        }
+                    }
+                });
+            }
+        });
+
+    });
+</script>

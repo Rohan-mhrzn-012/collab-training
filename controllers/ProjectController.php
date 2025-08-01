@@ -134,14 +134,23 @@ class ProjectController
 
     public function delete()
     {
-        $project_id = $_GET["project_id"];
+        // $project_id = $_GET["project_id"];
+
+        $project_id = $_POST["project_id"];
+        
         $query = "DELETE from projects where project_id=?";
         $prepare_statement = $this->connection->prepare($query);
         $prepare_statement->bind_param("i", $project_id);
-        $prepare_statement->execute();
 
-        header("Location:/core_php/collab-training/index.php?page=delete_project");
-        exit();
+        if($prepare_statement->execute()){
+            echo json_encode(["status"=>"success"]);
+        }
+        else{
+            echo json_encode(["status"=>"failed","message"=>"Delete failed"]);
+        }
+
+        // header("Location:/core_php/collab-training/index.php?page=delete_project");
+        // exit();
     }
 
     
