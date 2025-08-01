@@ -1,4 +1,5 @@
 <?php
+session_start();
 include __DIR__ . "/controllers/ProjectController.php";
 
 $route = $_GET["route"] ?? null;

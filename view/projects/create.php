@@ -1,6 +1,9 @@
 <?php
-include __DIR__ . "/../../controllers/ProjectController.php";
-include __DIR__ . "/../../controllers/userController.php";
+$errors = $_SESSION['error'] ?? null;
+unset($_SESSION['error']);
+
+require_once __DIR__ . "/../../controllers/ProjectController.php";
+require_once  __DIR__ . "/../../controllers/userController.php";
 $create_obj = new UserController;
 $datas = $create_obj->getAllUsers();
 $statuses = ['starting', 'ongoing', 'completed'];
@@ -31,19 +34,17 @@ $statuses = ['starting', 'ongoing', 'completed'];
 
 <h1>Create new Project</h1>
 
-<a href="/core_php/collab-training/routes.php?route=project&action=create"></a>
 
-<form action="#" method="POST" enctype="multipart/form-data">
+
+<form action="/core_php/collab-training/routes.php?route=project&action=create" method="POST" enctype="multipart/form-data">
     <div class="mb-3">
         <label for="project_name" class="form-label">Project Name:</label>
         <input type="text" class="form-control" name="project_name" id="project_name" placeholder="Enter project name">
     </div>
 
-    <?php if (!empty($error)):    ?>
-        <div>
-            <?php echo $error; ?>
-        </div>
-    <?php endif ?>
+    <?php if ($errors): ?>
+        <div class="alert alert-danger" ><?php echo($errors) ?></div>
+    <?php endif; ?>
 
     <!-- <label for="project name">Project Name:</label>
     <input type="text" id="project_name" name="project_name" value="" placeholder="Please enter the project name"> -->
