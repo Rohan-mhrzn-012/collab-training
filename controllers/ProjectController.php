@@ -117,16 +117,22 @@ class ProjectController
             $start_date = $_POST["start_date"];
             $end_date = $_POST["end_date"];
             $status = $_POST["status"];
-
+            //Delete the old photo on the basis of the old photo name
+            //do query to get old image name from database on the basis of the id
+            $old_img=
             $project_image = [];
             if (isset($_FILES["project_image"])) {
                 $tempName = $_FILES["project_image"]["tmp_name"];
                 $originalName = basename($_FILES["project_image"]["name"]);
                 $extension = pathinfo($originalName, PATHINFO_EXTENSION);
                 $project_image = uniqid("project_", true) . "." . $extension;
+
                 $destination = __DIR__ . "/../public/uploads/project_images/" . $project_image;
                 move_uploaded_file($tempName, $destination);
             }
+
+
+            // unlink();
             $query = "UPDATE projects SET project_name=?, description=?,start_date=?,end_date=?, status=?, project_image=? where project_id=?";
             $stmt = $this->connection->prepare($query);
             $stmt->bind_param("ssssssi", $project_name, $project_description, $start_date, $end_date, $status, $project_image, $project_id);

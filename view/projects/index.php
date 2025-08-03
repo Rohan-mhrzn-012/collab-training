@@ -37,12 +37,12 @@ $projects = $project_obj->index();
         background-color: #b5adadff;
     }
     #insert{
-        border:2px solid black;
+        
         width: 20%;
-        text-align: center;
+        
         padding: 5px;
         margin: 5px;
-        border-radius: 5px;        
+                
     }
     a{
         text-decoration: none;
@@ -57,11 +57,14 @@ $projects = $project_obj->index();
 
 <h1>PROJECTS</h1>
 <div id="insert">    
-    <a href="/core_php/collab-training/index.php?page=create_project&action=create">Insert New Project</a>
+    <a class="btn btn-dark" 
+     href="/core_php/collab-training/index.php?page=create_project&action=create">Insert New Project</a>
 </div>
 
-<table class="table">
-  <thead class="table-dark">
+
+
+<table class="table table-hover table-striped">
+  <thead class="table-dark ">
     <tr>            
             <th>Project Name</th>
             <th>User Name</th>
@@ -100,6 +103,8 @@ $projects = $project_obj->index();
     $(document).ready(function (){
         $(".btn-danger").click(function (){
             let id =$(this).data("id");
+            const row =$(this).closest("tr");
+            // console.log($(this),row.hide());
 
             if(confirm("Are you sure you want to delete this?")){
                 $.ajax({
@@ -110,7 +115,8 @@ $projects = $project_obj->index();
                         let res = JSON.parse(response);
                         if(res.status === "success"){
                             alert("Deletion successful");
-                            location.reload();
+                            // location.reload();
+                            row.hide();
                         }
                         else{
                             alert("Deletion failed"+ res.message);

@@ -49,6 +49,14 @@ if ($user === null) {
       <?php include_once "./view/projects/index.php"; ?>
     <?php elseif ($page === 'profile'): ?>
       <?php include_once './profile.php'; ?>
+    <?php elseif ($page==='skills'):?>
+      <?php include_once "./view/skills/index.php";?>
+    <?php elseif ($page==="view-skill"):?>
+      <?php include_once "./view/skills/view.php";?>
+    <?php elseif ($page==="edit-skill"):?>
+      <?php include_once "./view/skills/edit.php";?>
+    <?php elseif ($page==="create-skill"):?>
+      <?php include_once "./view/skills/create.php"?>
     <?php else: ?>
       <h1>Page not found</h1>
     <?php endif; ?>
