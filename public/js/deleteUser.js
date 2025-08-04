@@ -1,22 +1,26 @@
-function deleteUser(id, el) {
-    if (confirm("Are you sure you want to delete user ID " + id + "?")) {
-        fetch('/../collab-training/controllers/userController.php&action=delete', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            },
-            body: 'id=' + encodeURIComponent(id)
-        })
-        .then(response => response.text())
-        .then(data => {
-            alert("Deleted: " + data);
-            const row = el.closest('tr');
-            if (row) row.remove();
-        })
-        .catch(error => {
-            console.error("Error deleting user:", error);
-            alert("Failed to delete user.");
+$(function() {
+    $('#user_table').on('click', '.delete-user', function(e) {
+        e.preventDefault();
+        const row = $(this).closest('tr');
+        if (!confirm('Are you sure you want to delete this user?')) return;//this is for confirm delete yes 
+
+        $.ajax({
+            url: '/../collab-training/router.php?action=delete',
+            type: 'POST',
+            dataType: 'json',
+            data: { id: $(this).data('id') },
+            success: function(res) {
+                if (res.status === 'success') {
+                    row.hide();//after deleting the user in table it removes 
+                    alert(res.message);
+                    console.log("hello");
+                } else {
+                    alert(res.message || 'Delete failed');
+                }
+            },error: function(xhr) {
+                alert('AJAX error: ' + xhr.statusText);
+            }
         });
-    }
-    return false;
-}
+        
+    });
+});
