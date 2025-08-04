@@ -45,32 +45,47 @@
 </table>
 
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"> </script>
-
-
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-    $(document).ready(function (){
-        $(".btn-danger").click(function (){
-            let id =$(this).data("id");
-            const row =$(this).closest("tr");           
+    $(document).ready(function () {
+        $(".btn-danger").click(function () {
+            let id = $(this).data("id");
+            const row = $(this).closest("tr");
 
-            if(confirm("Are you sure you want to delete this?")){
-                $.ajax({
-                    url:"/core_php/collab-training/routes.php?route=experience&action=delete",
-                    type:"POST",
-                    data: {exp_id:id},
-                    success: function(response){
-                        let res = JSON.parse(response);
-                        if(res.status === "success"){
-                            alert("Deletion successful");                           
-                            row.hide();
+            Swal.fire({
+                title: "Are you sure you want to delete this experience?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, delete it!"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: "/core_php/collab-training/routes.php?route=experience&action=delete",
+                        type: "POST",
+                        data: { exp_id: id },
+                        success: function (response) {
+                            let res = JSON.parse(response);
+                            if (res.status === "success") {
+                                Swal.fire(
+                                    "Deleted!",
+                                    "Deletion successful.",
+                                    "success"
+                                );
+                                row.hide();
+                            } else {
+                                Swal.fire(
+                                    "Error!",
+                                    "Deletion failed: " + res.message,
+                                    "error"
+                                );
+                            }
                         }
-                        else{
-                            alert("Deletion failed"+ res.message);
-                        }
-                    }
-                });
-            }
+                    });
+                }
+            });
         });
-
     });
 </script>
