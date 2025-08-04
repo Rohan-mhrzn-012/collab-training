@@ -52,7 +52,7 @@ $statuses = ['starting', 'ongoing', 'completed'];
 
     <label for="status">Project Status:</label>
     <select name="status" id="status" class="form-select" aria-label="Default select example">
-        <option value=""><?php echo $edit_data["status"] ?></option>
+        <option value="<?php echo $edit_data["status"] ?>"><?php echo $edit_data["status"] ?></option>
         <?php foreach ($statuses as $status_value): ?>
             <option value="<?php echo $status_value; ?>"><?php echo $status_value; ?></option>
         <?php endforeach; ?>

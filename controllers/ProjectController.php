@@ -119,7 +119,19 @@ class ProjectController
             $status = $_POST["status"];
             //Delete the old photo on the basis of the old photo name
             //do query to get old image name from database on the basis of the id
-            $old_img=
+
+            $img_query="SELECT project_image from projects where project_id=?";
+            $img_stmt=$this->connection->prepare($img_query);
+            $img_stmt->bind_param("i",$project_id);
+            $img_stmt->execute();
+            $img_result=$img_stmt->get_result();
+            $row=$img_result->fetch_assoc();
+            $old_img=$row["project_image"];
+
+            $old_path= __DIR__ ."/../public/uploads/project_images/".$old_img;
+            if(file_exists($old_path)){
+                unlink($old_path);
+            }
             $project_image = [];
             if (isset($_FILES["project_image"])) {
                 $tempName = $_FILES["project_image"]["tmp_name"];
