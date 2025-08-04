@@ -180,8 +180,10 @@ class ProjectController
         $prepare_statement->bind_param("i", $project_id);
 
         if ($prepare_statement->execute()) {
+            http_response_code(200);//Okay
             echo json_encode(["status" => "success"]);
         } else {
+            http_response_code(500);
             echo json_encode(["status" => "failed", "message" => "Delete failed"]);
         }
 
