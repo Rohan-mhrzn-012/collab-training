@@ -34,10 +34,12 @@ class AuthController {
                     "username" => $user['username'],
                     "profile_picture" => $user['profile_picture']
                 ];
-                return ['success'=> true, "message" => "Logged in successfully."];
+                return ['status_code' => '200', 'success'=> true, "message" => "Logged in successfully."];
             }   else {
-                return ['success'=> false, "message" => "Invalid Username Or Password."];
+                return ['status_code' => '401', 'success'=> false, "message" => "Invalid Username Or Password."];
             }
+        }else{
+            return ['status_code' => '404', 'success' => false, "message" => "User not found"];
         }
     }
 

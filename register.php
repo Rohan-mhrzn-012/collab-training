@@ -107,7 +107,8 @@
     </div>
   </div>
 
-  <script src="./public/js/validateform.js" type="module"></script>
+  <script src="./public/js/validateFormJquery.js" type="module"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </body>
 
 </html>

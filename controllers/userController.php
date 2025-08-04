@@ -19,6 +19,7 @@ class UserController {
     }
 
     public function delete(){
-        return json_encode("message ho yo");
+        header("Content-Type: application/json");
+        echo json_encode(["success"=> true, "message"=> "message ho yo"]);
     }
 }

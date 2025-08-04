@@ -45,21 +45,32 @@ if ($user === null) {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script>
     let userIdToDelete = null;
-    
-    $("#delete-user-btn").on("click", function(){
+    let rowToDelete = null;
+
+    $(".delete-user-btn").on("click", function(){
       userIdToDelete = $(this).data('user-id');
+      rowToDelete = $(this);
     });
 
     $("#confirm-delete").on('click', function(){
+      
       $.ajax({
-        url: '/collab-training/router.php?route=user/delete',
-        type: 'POST',
-        data: {id: userIdToDelete},
-        dataType: 'json',
-        success: function(response){
-        },
-        error: function(response){
-        }
+          url: '/collab-training/router.php?route=user/delete',
+          type: 'POST',
+          data: {id: userIdToDelete},
+          dataType: 'json',
+          success: function(response){
+            if (response.success === true) {
+              rowToDelete.closest('tr').fadeOut(500, function(){
+                $(this).hide();
+              });
+
+              $("#userDeleteModal").modal('hide');
+            }
+          },
+          error: function(response){
+            alert("Internal server error");
+          }
       });
     });
 </script>

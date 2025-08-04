@@ -19,12 +19,17 @@ switch ($route) {
             $response = $authController->login($email, $password);
 
             if ($response['success'] == true) {
-                header("Location: /collab-training/index.php?page=dashboard");
+                 http_response_code($response['status_code']);
+                echo json_encode(["success" => true, "message" => $response['message'], 'redirect_url' => '/collab-training/index.php?page=dashboard']);
+                // header("Location: /collab-training/index.php?page=dashboard");
                 exit;
             } else{
+                http_response_code($response['status_code']);
+                echo json_encode(["success" => false, "message" => $response['message']]);
                 $_SESSION['error'] = $response['message'];
-                header("Location: /collab-training/login.php");
+                // header("Location: /collab-training/login.php");
             }
+            exit;
         }
 
     case 'auth/logout':

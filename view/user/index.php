@@ -21,7 +21,7 @@
                     <a href="./index.php?page=view-user&id=<?php echo $user['id'] ?>" class="btn btn-info btn-sm me-1">
                         <i class="bi bi-eye"></i> View
                     </a>
-                    <button type="button" id="delete-user-btn" class="btn btn-danger btn-sm" data-user-id="<?php echo $user['id'] ?>" data-bs-toggle="modal" data-bs-target="#userDeleteModal">
+                    <button type="button" class="btn btn-danger btn-sm delete-user-btn" data-user-id="<?php echo $user['id'] ?>" data-bs-toggle="modal" data-bs-target="#userDeleteModal">
                         delete
                     </button>
                 </td>
