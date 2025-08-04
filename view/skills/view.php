@@ -5,6 +5,12 @@
     
 ?>
 
+<style>
+    td{
+        width: 70%;
+    }
+</style>
+
 
 <h1><?php echo$datas["skill_name"]."' information";?></h1>
 <table class="table  table-bordered ">
