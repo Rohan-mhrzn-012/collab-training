@@ -26,18 +26,18 @@ $levels = ['beginner', 'intermediate', 'advanced'];
 <form action="/core_php/collab-training/routes.php?route=skills&action=create" method="POST">
     <div class="mb-3">
         <label for="skill_name" class="form-label">Skill Name:</label>
-        <input type="text" class="form-control" name="skill_name" id="skill_name" value="">
+        <input type="text" class="form-control" name="skill_name" id="skill_name" value="" placeholder="Enter the skill name">
     </div>
 
     <div class="mb-3">
         <label for="skill_category" class="form-label">Skill Category:</label>
-        <input type="text" class="form-control" name="skill_category" id="skill_category" value="">
+        <input type="text" class="form-control" name="skill_category" id="skill_category" value="" placeholder="Enter the skill category">
     </div>
 
     <div class="mb-3">
         <label for="skill_level">Skill Level:</label>
         <select name="skill_level" id="skill_level" class="form-select" aria-label="Default select example">
-            <option value=""></option>
+            <option value="">Select the skill level:</option>
             <?php foreach ($levels as $level): ?>
                 <option value="<?php echo $level; ?>"><?php echo $level; ?></option>
             <?php endforeach; ?>

@@ -106,7 +106,7 @@ class ExperienceController
         $query = "DELETE from experience where id=?";
         $prepare_statement = $this->connection->prepare($query);
         $prepare_statement->bind_param("i", $exp_id);
-
+        $_SESSION["success"] = "Experience deleted successfully!";
         if ($prepare_statement->execute()) {
             echo json_encode(["status" => "success"]);
         } else {
