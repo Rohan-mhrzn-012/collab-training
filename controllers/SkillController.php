@@ -79,7 +79,7 @@ class SkillController
             $stmt->execute();
 
 
-            header("Location:/core_php/collab-training/index.php?page=edit-skill&id=" . $id);
+            header("Location:/core_php/collab-training/index.php?page=skills&id=" . $id);
         }
     }
 

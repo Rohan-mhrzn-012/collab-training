@@ -3,6 +3,7 @@ include_once __DIR__ . "/../../controllers/SkillController.php";
 $edit_obj = new SkillController;
 $edit_data = $edit_obj->view();
 $users=["woodcarver","pradeep","roshan","programmer"];
+$levels = ['beginner', 'intermediate', 'advanced'];
 
 ?>
 <style>
@@ -53,9 +54,14 @@ $users=["woodcarver","pradeep","roshan","programmer"];
     </div>  
 
     <div class="mb-3">
-        <label for="skill_level" class="form-label">Skill Level:</label>
-        <input type="text" class="form-control" name="skill_level" id="skill_level" value="<?php echo $edit_data["skill_level"] ?>">
-    </div> 
+        <label for="skill_level">Skill Level:</label>
+        <select name="skill_level" id="skill_level" class="form-select" aria-label="Default select example">
+            <option value=""><?php echo $edit_data["skill_level"] ?></option>
+            <?php foreach ($levels as $level): ?>
+                <option value="<?php echo $level; ?>"><?php echo $level; ?></option>
+            <?php endforeach; ?>
+        </select>
+    </div>
     
     <label for="created_at">Created At:</label>
     <input type="date" id="created_at" name="created_at" value="<?php echo $edit_data["created_at"]; ?>">
