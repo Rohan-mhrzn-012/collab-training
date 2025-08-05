@@ -1,7 +1,7 @@
 <?php
     include_once __DIR__ ."/../../controllers/SkillController.php";
     $skill_obj= new SkillController;
-   $datas= $skill_obj->getAllSkills();
+   $datas= $skill_obj->index();
     
 ?>
 <style>
@@ -15,6 +15,7 @@
 <table class="table table-striped table-bordered align-middle">
     <thead class="table-dark">
         <tr>
+            <th>User's Name</th>
             <th>Skill Name</th>
             <th>Skill Category</th>
             <th>Skill Level</th>
@@ -26,6 +27,7 @@
     <tbody>
         <?php foreach($datas as $data):?>
         <tr>
+            <td><?php echo $data["fullname"];?></td>
             <td><?php echo $data["skill_name"];?></td>
             <td><?php echo $data["skill_category"];?></td>
             <td><?php echo $data["skill_level"];?></td>

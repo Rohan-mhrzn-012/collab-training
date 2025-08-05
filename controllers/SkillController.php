@@ -18,6 +18,13 @@ class SkillController
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
+    public function index()
+    {
+        $query = "SELECT skills.*,users.fullname from skills INNER JOIN users on skills.user_id=users.id;";
+        $result = $this->connection->query($query);
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
     public function create()
     {
 
@@ -39,7 +46,7 @@ class SkillController
     public function view()
     {
         $id = $_GET["id"] ?? null;
-        $query = "SELECT * FROM skills WHERE id = ?";
+        $query = "SELECT skills.*,users.* FROM skills INNER JOIN users on skills.user_id=users.id WHERE skills.id = ?";
         $stmt = $this->connection->prepare($query);
         $stmt->bind_param("i", $id);
         $stmt->execute();

@@ -32,7 +32,7 @@
     <div class="mb-3">
         <label for="username">Username:</label>
         <select name="username" id="username" class="form-select" aria-label="Default select example">
-            <option value=""><?php echo$data["username"]?></option>
+            <option value="<?php echo$data["username"]?>"><?php echo$data["username"]?></option>
             <?php foreach ($users as $user): ?>
                 <option value="<?php echo $user ?>"><?php echo $user ?></option>
             <?php endforeach; ?>

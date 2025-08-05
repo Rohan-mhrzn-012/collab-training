@@ -170,8 +170,7 @@ class ProjectController
     }
 
     public function delete()
-    {
-        // $project_id = $_GET["project_id"];
+    {       
 
         $project_id = $_POST["project_id"];
 
@@ -186,9 +185,7 @@ class ProjectController
             http_response_code(500);
             echo json_encode(["status" => "failed", "message" => "Delete failed"]);
         }
-
-        // header("Location:/core_php/collab-training/index.php?page=delete_project");
-        // exit();
+        
     }
 }
 

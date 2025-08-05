@@ -2,6 +2,7 @@
 include_once __DIR__ . "/../../controllers/SkillController.php";
 $edit_obj = new SkillController;
 $edit_data = $edit_obj->view();
+$users=["woodcarver","pradeep","roshan","programmer"];
 
 ?>
 <style>
@@ -31,6 +32,16 @@ $edit_data = $edit_obj->view();
 
 
 <form action="/core_php/collab-training/routes.php?route=skills&action=edit&id=<?php echo $edit_data["id"] ?>" method="POST" >
+
+    <div class="mb-3">
+    <label for="username">Username:</label>
+    <select name="username" id="username" class="form-select" aria-label="Default select example">
+        <option value="">Select a username:</option>
+        <?php foreach($users as $user):?>
+        <option value="<?php echo$user;?>"><?php echo$user;?></option>
+        <?php endforeach;?>
+    </select>
+    </div>
     <div class="mb-3">
         <label for="skill_name" class="form-label">Skill Name:</label>
         <input type="text" class="form-control" name="skill_name" id="skill_name" value="<?php echo $edit_data["skill_name"] ?>">
