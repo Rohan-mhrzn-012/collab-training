@@ -33,9 +33,18 @@ class SkillController
         $level = $_POST["skill_level"];
         $created = $_POST["created_at"];
         $updated = $_POST["updated_at"];
-        $query = "INSERT into skills (skill_name,skill_category,skill_level,created_at,updated_at) values(?,?,?,?,?)";
+        $username = $_POST["username"] ?? null;
+
+        $user_query = "SELECT id from users where username=?";
+        $user_stmt = $this->connection->prepare($user_query);
+        $user_stmt->bind_param("s", $username);
+        $user_stmt->execute();
+        $user_result = $user_stmt->get_result();
+        $user_id = $user_result->fetch_assoc()["id"];
+
+        $query = "INSERT into skills (skill_name,skill_category,skill_level,created_at,updated_at,user_id) values(?,?,?,?,?,?)";
         $stmt = $this->connection->prepare($query);
-        $stmt->bind_param("sssss", $name, $category, $level, $created, $updated);
+        $stmt->bind_param("sssssi", $name, $category, $level, $created, $updated,$user_id);
         if ($stmt->execute()) {
             header("Location:/core_php/collab-training/index.php?page=skills");
         } else {
@@ -63,9 +72,10 @@ class SkillController
             $level = $_POST["skill_level"];
             $created = $_POST["created_at"];
             $updated = $_POST["updated_at"];
-            $query = "UPDATE skills set skill_name=?, skill_category=?,skill_level=?,created_at=?,updated_at=? where id=?";
+            $username = $_POST["username"];
+            $query = "UPDATE skills INNER JOIN users on skills.user_id=users.id set skills.skill_name=?, skills.skill_category=?, skills.skill_level=?,skills.created_at=?,skills.updated_at=?,users.username=? where skills.id=?";
             $stmt = $this->connection->prepare($query);
-            $stmt->bind_param("sssssi", $name, $category, $level, $created, $updated, $id);
+            $stmt->bind_param("ssssssi", $name, $category, $level, $created, $updated, $username, $id);
             $stmt->execute();
 
 

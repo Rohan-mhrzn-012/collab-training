@@ -1,5 +1,6 @@
 <?php
 $levels = ['beginner', 'intermediate', 'advanced'];
+$users=["woodcarver","programmer","roshan","pradeep"];
 ?>
 <style>
     form {
@@ -24,6 +25,15 @@ $levels = ['beginner', 'intermediate', 'advanced'];
 </style>
 <h2>Add new Skill</h2>
 <form action="/core_php/collab-training/routes.php?route=skills&action=create" method="POST">
+    <div class="mb-3">
+    <label for="username">Username:</label>
+    <select name="username" id="username" class="form-select" aria-label="Default select example">
+        <option value="">Select a username</option>
+        <?php foreach($users as $user):?>
+        <option value="<?php echo$user;?>"><?php echo$user;?></option>
+        <?php endforeach;?>
+    </select>
+    </div>
     <div class="mb-3">
         <label for="skill_name" class="form-label">Skill Name:</label>
         <input type="text" class="form-control" name="skill_name" id="skill_name" value="" placeholder="Enter the skill name">
