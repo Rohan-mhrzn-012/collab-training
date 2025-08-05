@@ -40,7 +40,11 @@ $view_data = $project_obj->view();
 
 <table class="table">  
   <tbody>
-     <tr>
+        <tr>
+            <th class="table-dark">User's Name</th>
+            <td><?php echo $view_data["fullname"] ?> </td>
+        </tr>
+        <tr>
             <th class="table-dark">Project Name</th>
             <td><?php echo $view_data["project_name"] ?> </td>
         </tr>

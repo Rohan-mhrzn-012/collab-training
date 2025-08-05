@@ -135,12 +135,44 @@ class ProjectController
     {
         if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_GET["id"])) {
             $project_id = $_GET["id"];
+            $errors = [];
+            //Form validation
+            //getting the old data from the database for the validation
+            $edit_query = "SELECT * FROM projects WHERE project_id=?";
+            $stmt = $this->connection->prepare($edit_query);
+            $stmt->bind_param("i", $project_id);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $project = $result->fetch_assoc();
+
+
             //updating in the database
-            $project_name = $_POST["project_name"];
-            $project_description = $_POST["project_description"];
-            $start_date = $_POST["start_date"];
-            $end_date = $_POST["end_date"];
-            $status = $_POST["status"];
+            $project_name = $_POST["project_name"] ?? $project["project_name"];
+            if (empty($project_name)) {
+                $errors['project_name'] = "The project name is empty";
+            }
+            $project_description = $_POST["project_description"] ?? $project["project_description"];
+            if (empty($project_description)) {
+                $errors['project_description'] = "The project description is empty";
+            }
+            $start_date = $_POST["start_date"] ?? $project["start_date"];
+            $end_date = $_POST["end_date"] ?? $project["end_date"];
+            if (empty($start_date) || empty($end_date)) {
+                $errors['date'] = "The date is empty";
+            } else if (strtotime($start_date) > strtotime($end_date)) {
+                $errors['date'] = "The end date is earlier than the start date.";
+            }
+            $status = $_POST["status"] ?? $project["status"];
+            if (empty($status)) {
+                $errors['status'] = "The status is empty";
+            }
+
+            if (!empty($errors)) {
+                $_SESSION['errors'] = $errors;
+                $_SESSION['old'] = $_POST;
+                header("Location:/core_php/collab-training/index.php?page=edit_project&id=" . $project_id);
+                exit;
+            }
             //Delete the old photo on the basis of the old photo name
             //do query to get old image name from database on the basis of the id
 
@@ -172,16 +204,20 @@ class ProjectController
             $query = "UPDATE projects SET project_name=?, description=?,start_date=?,end_date=?, status=?, project_image=? where project_id=?";
             $stmt = $this->connection->prepare($query);
             $stmt->bind_param("ssssssi", $project_name, $project_description, $start_date, $end_date, $status, $project_image, $project_id);
-            $stmt->execute();
-            header("Location:/core_php/collab-training/index.php?page=edit_project&id=" . $project_id);
-            exit();
+            if (empty($errors)) {
+                $stmt->execute();
+                header("Location:/core_php/collab-training/index.php?page=edit_project&id=" . $project_id);
+                exit();
+            }
+            // $stmt->execute();
+
         }
     }
 
     public function view()
     {
         $project_id = $_GET["id"];
-        $query = "SELECT * from projects where project_id=?";
+        $query = "SELECT projects.*,users.* from projects INNER JOIN users on projects.user_id=users.id where projects.project_id=?";
         $prepare_stmt = $this->connection->prepare($query);
         $prepare_stmt->bind_param("i", $project_id);
         $prepare_stmt->execute();

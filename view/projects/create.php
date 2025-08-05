@@ -88,6 +88,9 @@ $statuses = ['starting', 'ongoing', 'completed'];
             <option value="<?php echo $data["username"]; ?>" name="" <?php echo (!empty($old['username']) && $old['username'] === $data["username"]) ? 'selected' : ''; ?>><?php echo $data["username"]; ?></option>
         <?php endforeach ?>
     </select>
+    <?php if (!empty($errors["username"])): ?>
+        <div class="alert alert-danger" ><?php echo($errors["username"]); ?></div>
+    <?php endif; ?>
     <div class="mb-3">
         <label for="project_image" class="form-label"></label>
         <input class="form-control" type="file" id="formFile" accept="image/*" name="project_image" id="project_image">
