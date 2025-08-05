@@ -56,7 +56,7 @@ $levels = ['beginner', 'intermediate', 'advanced'];
     <div class="mb-3">
         <label for="skill_level">Skill Level:</label>
         <select name="skill_level" id="skill_level" class="form-select" aria-label="Default select example">
-            <option value=""><?php echo $edit_data["skill_level"] ?></option>
+            <option value="<?php echo $edit_data["skill_level"] ?>"><?php echo $edit_data["skill_level"] ?></option>
             <?php foreach ($levels as $level): ?>
                 <option value="<?php echo $level; ?>"><?php echo $level; ?></option>
             <?php endforeach; ?>
