@@ -1,0 +1,249 @@
+<?php require_once __DIR__ . "/../database/db.php";
+
+class ProjectController
+{
+    private $connection;
+
+    public function __construct()
+    {
+        $db = new Database;
+        $this->connection = $db->getConnection();
+    }
+    public function getAllProjects()
+    {
+        $raw_query = "SELECT * FROM projects";
+        $query = $this->connection->query($raw_query);
+        // if($query){
+        return $query->fetch_all(MYSQLI_ASSOC);
+        // }
+        // return [];        
+    }
+
+    public function index()
+    {
+        $query = "SELECT projects.*,users.fullname FROM projects 
+            INNER JOIN users on projects.user_id=users.id";
+        $result = $this->connection->query($query);
+
+        $projects = [];
+        if ($result) {
+            $projects = $result->fetch_all(MYSQLI_ASSOC);
+        }
+        // return $projects;
+
+        return [
+            "project_data" => $projects,
+
+        ];
+    }
+
+    public function create()
+    {
+
+        if ($_SERVER["REQUEST_METHOD"] === "POST") {
+            $errors = [];
+            //getting user id on the basis of the username selected
+            $username = $_POST["username"];
+            if (empty($username)) {
+                $errors["username"] = "The username is empty";
+            } else {
+                // Only query if username is provided
+                $id_query = "SELECT * FROM users WHERE username=?";
+                $prepare_statement = $this->connection->prepare($id_query);
+                $prepare_statement->bind_param("s", $username);
+                $prepare_statement->execute();
+                $id = $prepare_statement->get_result();
+                $row = $id->fetch_assoc();
+
+                if (!$row) {
+                    $errors["username"] = "Selected user not found.";
+                } else {
+                    $user_id = $row["id"];
+                }
+            }
+
+            //getting image from create form and giving it temporary name and storing it in the system
+            //name is stored in database but file is temporarily saved in the system
+
+            $project_image = null;
+            if (isset($_FILES["project_image"])) {
+                //accessing the temporary path
+                $tempName = $_FILES["project_image"]["tmp_name"];
+                //getting the actual location
+
+                $originalName = basename($_FILES["project_image"]["name"]); //basename prevents directory traversal attacks
+                //accessing the file extension like jpg, png
+                $extension = pathinfo($originalName, PATHINFO_EXTENSION);
+                //giving unique name to the image
+                $project_image = uniqid("project_", true) . "." . $extension;
+
+                //copying to public/uploads/project_images
+                $destination = __DIR__ . "/../public/uploads/project_images/" . $project_image;
+                //now the project image will be in our system
+                move_uploaded_file($tempName, $destination);
+            }
+
+            $project_name = $_POST["project_name"];
+
+            if (empty($project_name)) {
+                // $error = "The project name is empty";
+                // include "./view/projects/create.php";
+                $errors['project_name'] = "The project name is empty";
+            }
+            $project_description = $_POST["project_description"];
+
+            if (empty($project_description)) {
+                $errors['description'] = "The project description is empty";
+            }
+            $start_date = $_POST["start_date"];
+            $end_date = $_POST["end_date"];
+
+            if (!empty($start_date) && !empty($end_date)) {
+                if (strtotime($start_date) > strtotime($end_date)) {
+                    $errors['date'] = "ERROR:The end date is earlier than start date";
+                }
+            }
+            $status = $_POST["status"];
+            if (empty($status)) {
+                $errors['status'] = "The project status is empty";
+            } elseif (!($status === "starting" || $status === "ongoing" || $status === "completed")) {
+                $errors['status'] = "The project status is not valid.";
+            }
+
+            if (!empty($errors)) {
+                $_SESSION['errors'] = $errors;
+                $_SESSION['old'] = $_POST;
+                header("Location:/core_php/collab-training/index.php?page=create_project");
+                exit;
+            }
+            $query = "INSERT into projects (project_name, description, start_date, end_date,status,user_id,project_image) values(?,?,?,?,?,?,?)";
+            $stmt = $this->connection->prepare($query);
+            $stmt->bind_param("sssssis", $project_name, $project_description, $start_date, $end_date, $status, $user_id, $project_image);
+
+            if ($stmt->execute()) {
+                header("Location:/core_php/collab-training/index.php?page=projects");
+            } else {
+                echo "Error";
+            }
+
+
+            exit();
+        }
+    }
+
+    public function edit()
+    {
+        if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_GET["id"])) {
+            $project_id = $_GET["id"];
+            $errors = [];
+            //Form validation
+            //getting the old data from the database for the validation
+            $edit_query = "SELECT * FROM projects WHERE project_id=?";
+            $stmt = $this->connection->prepare($edit_query);
+            $stmt->bind_param("i", $project_id);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $project = $result->fetch_assoc();
+
+
+            //updating in the database
+            $project_name = $_POST["project_name"] ?? $project["project_name"];
+            if (empty($project_name)) {
+                $errors['project_name'] = "The project name is empty";
+            }
+            $project_description = $_POST["project_description"] ?? $project["project_description"];
+            if (empty($project_description)) {
+                $errors['project_description'] = "The project description is empty";
+            }
+            $start_date = $_POST["start_date"] ?? $project["start_date"];
+            $end_date = $_POST["end_date"] ?? $project["end_date"];
+            if (empty($start_date) || empty($end_date)) {
+                $errors['date'] = "The date is empty";
+            } else if (strtotime($start_date) > strtotime($end_date)) {
+                $errors['date'] = "The end date is earlier than the start date.";
+            }
+            $status = $_POST["status"] ?? $project["status"];
+            if (empty($status)) {
+                $errors['status'] = "The status is empty";
+            }
+
+            if (!empty($errors)) {
+                $_SESSION['errors'] = $errors;
+                $_SESSION['old'] = $_POST;
+                header("Location:/core_php/collab-training/index.php?page=edit_project&id=" . $project_id);
+                exit;
+            }
+            //Delete the old photo on the basis of the old photo name
+            //do query to get old image name from database on the basis of the id
+
+            $img_query = "SELECT project_image from projects where project_id=?";
+            $img_stmt = $this->connection->prepare($img_query);
+            $img_stmt->bind_param("i", $project_id);
+            $img_stmt->execute();
+            $img_result = $img_stmt->get_result();
+            $row = $img_result->fetch_assoc();
+            $old_img = $row["project_image"];
+
+            $old_path = __DIR__ . "/../public/uploads/project_images/" . $old_img;
+            if (file_exists($old_path)) {
+                unlink($old_path);
+            }
+            $project_image = [];
+            if (isset($_FILES["project_image"])) {
+                $tempName = $_FILES["project_image"]["tmp_name"];
+                $originalName = basename($_FILES["project_image"]["name"]);
+                $extension = pathinfo($originalName, PATHINFO_EXTENSION);
+                $project_image = uniqid("project_", true) . "." . $extension;
+
+                $destination = __DIR__ . "/../public/uploads/project_images/" . $project_image;
+                move_uploaded_file($tempName, $destination);
+            }
+
+
+            // unlink();
+            $query = "UPDATE projects SET project_name=?, description=?,start_date=?,end_date=?, status=?, project_image=? where project_id=?";
+            $stmt = $this->connection->prepare($query);
+            $stmt->bind_param("ssssssi", $project_name, $project_description, $start_date, $end_date, $status, $project_image, $project_id);
+            if (empty($errors)) {
+                $stmt->execute();
+                header("Location:/core_php/collab-training/index.php?page=edit_project&id=" . $project_id);
+                exit();
+            }
+            // $stmt->execute();
+
+        }
+    }
+
+    public function view()
+    {
+        $project_id = $_GET["id"];
+        $query = "SELECT projects.*,users.* from projects INNER JOIN users on projects.user_id=users.id where projects.project_id=?";
+        $prepare_stmt = $this->connection->prepare($query);
+        $prepare_stmt->bind_param("i", $project_id);
+        $prepare_stmt->execute();
+        $result = $prepare_stmt->get_result();
+        $view_data = $result->fetch_assoc();
+
+        return $view_data;
+
+        // header("Location: /core_php/collab_training/view/projects/view.php?page=view_project");
+    }
+
+    public function delete()
+    {
+
+        $project_id = $_POST["project_id"];
+
+        $query = "DELETE from projects where project_id=?";
+        $prepare_statement = $this->connection->prepare($query);
+        $prepare_statement->bind_param("i", $project_id);
+
+        if ($prepare_statement->execute()) {
+            http_response_code(200); //Okay
+            echo json_encode(["status" => "success"]);
+        } else {
+            http_response_code(500);
+            echo json_encode(["status" => "failed", "message" => "Delete failed"]);
+        }
+    }
+}

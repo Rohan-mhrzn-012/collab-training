@@ -116,7 +116,7 @@ class AuthController {
     
         session_destroy();
     
-        header("Location: /collab-training/login.php");
+        header("Location: /core_php/collab-training/login.php");
         exit;
     }
 

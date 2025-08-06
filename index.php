@@ -41,8 +41,42 @@ if ($user === null) {
     <?php include_once './view/user/user_role.php'; ?>
   <?php elseif ($page === 'edit-role'): ?>
     <?php include_once './view/user/edit.php'; ?>
-  <?php elseif ($page === 'project'): ?>
-    <?php include_once './view/user/project.php' ?>
+
+      <!-- Projects -->
+      <?php elseif ($page === "projects"): ?>
+      <?php include_once "./view/projects/index.php"; ?>
+    <?php elseif ($page === "create_project"): ?>
+      <?php include_once "./view/projects/create.php"; ?>
+    <?php elseif ($page === "view_project"): ?>
+      <?php include_once "./view/projects/view.php"; ?>
+    <?php elseif ($page === "edit_project"): ?>
+      <?php include_once "./view/projects/edit.php"; ?>
+    <?php elseif ($page === "delete_project"): ?>
+      <?php include_once "./view/projects/index.php"; ?>
+
+
+    <?php elseif ($page === 'profile'): ?>
+      <?php include_once './profile.php'; ?>
+
+    <!-- Skills -->
+    <?php elseif ($page==='skills'):?>
+      <?php include_once "./view/skills/index.php";?>
+    <?php elseif ($page==="view-skill"):?>
+      <?php include_once "./view/skills/view.php";?>
+    <?php elseif ($page==="edit-skill"):?>
+      <?php include_once "./view/skills/edit.php";?>
+    <?php elseif ($page==="create-skill"):?>
+      <?php include_once "./view/skills/create.php"?>
+
+    <!-- Experience -->
+     <?php elseif ($page==='experience'):?>
+      <?php include_once "./view/experience/index.php";?>
+    <?php elseif ($page==="view-experience"):?>
+      <?php include_once "./view/experience/view.php";?>
+    <?php elseif ($page==="edit-experience"):?>
+      <?php include_once "./view/experience/edit.php";?>
+    <?php elseif ($page==="create-experience"):?>
+      <?php include_once "./view/experience/create.php"?>
 
   <?php else: ?>
     <h1>Page not found</h1>

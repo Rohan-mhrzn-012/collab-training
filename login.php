@@ -7,7 +7,7 @@ if(session_status() === PHP_SESSION_NONE){
 
   $user = $_SESSION['user'] ?? null;
   if ($user) {
-    header('Location: /collab-training/index.php');
+    header('Location: /core_php/collab-training/index.php');
   }
 ?>
 
@@ -16,21 +16,24 @@ if(session_status() === PHP_SESSION_NONE){
 <head>
   <meta charset="UTF-8">
   <title>Login Page</title>
-  <link rel="stylesheet" href="./public/css/login.css">
+  <link rel="stylesheet" href="/core_php/collab-training/public/css/login.css">
 </head>
 <body>
   <h1></h1><?php echo $errors ?></h1>
   <h2>Login</h2>
   <form action="#" method="POST" id="login-form" class="login-container">
     <label for="email">email:</label><br>
-    <input type="text" id="email" name="email"><br><br>
+    <input type="text" id="email" name="email" placeholder="Please enter your e-mail address"><br><br>
 
     <label for="password">Password:</label><br>
-    <input type="password" id="password" name="password"><br><br>
+    <input type="password" id="password" name="password" placeholder="Please enter the password"><br><br>
     <div class="create_new" style="text-align: center;">
     <a href="/../collab-training/register.php">Create New Account</a></div>
-<br><br>
+    <br><br>
     <button type="submit">Login</button>
+    <p>Don't have an account? Create a new one.</p>
+    <a id="new_user" href="register.php">Create a new account</a>
+    
   </form>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

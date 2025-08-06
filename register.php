@@ -16,7 +16,7 @@
         </div>
         <div class="form-container">
           <div id="heading">
-            <h2>User Regsitration</h2>
+            <h2>User Registration</h2>
             <div class="errors">
             </div>
           </div>
