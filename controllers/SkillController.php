@@ -27,20 +27,47 @@ class SkillController
 
     public function create()
     {
+        $errors = [];
 
         $name = $_POST["skill_name"];
+        if (empty($name)) {                
+                $errors['name'] = "The skill name is empty";
+         }
         $category = $_POST["skill_category"];
+        if (empty($category)) {                
+                $errors['category'] = "The skill category is empty";
+            }
         $level = $_POST["skill_level"];
+        if (empty($level)) {                
+                $errors['level'] = "The skill level is empty";
+            }
         $created = $_POST["created_at"];
         $updated = $_POST["updated_at"];
-        $username = $_POST["username"] ?? null;
+        if (empty($created)||empty($updated)) {                
+                $errors['date'] = "The dates are empty";
+            }else if(!empty($start_date) && !empty($end_date)) {
+                if (strtotime($start_date) > strtotime($end_date)) {
+                    $errors['date'] = "ERROR:The updated date is earlier than created date";
+                }
+            }
 
+        $username = $_POST["username"] ?? null;
+        if (empty($username)) {
+                $errors["username"] = "The username is empty";
+            }else{
         $user_query = "SELECT id from users where username=?";
         $user_stmt = $this->connection->prepare($user_query);
         $user_stmt->bind_param("s", $username);
         $user_stmt->execute();
         $user_result = $user_stmt->get_result();
         $user_id = $user_result->fetch_assoc()["id"];
+        }
+        if (!empty($errors)) {
+                $_SESSION['errors'] = $errors;
+                $_SESSION['old'] = $_POST;
+                header("Location:/core_php/collab-training/index.php?page=create-skill");
+                exit;
+            } 
 
         $query = "INSERT into skills (skill_name,skill_category,skill_level,created_at,updated_at,user_id) values(?,?,?,?,?,?)";
         $stmt = $this->connection->prepare($query);

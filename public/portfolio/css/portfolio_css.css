@@ -67,7 +67,8 @@ body{
             gap:10px;
             margin: 10px;
             font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;  
-            height: 35vh; 
+            /* height: 35vh;  */
+            height: 100vh; 
             border-radius: 60px;         
         }
         .links1,.links2{
@@ -119,8 +120,15 @@ body{
         } 
           #exp_div{
             justify-content: center;
-            /* align-content: center; */
+            align-content: center;
+             height: 100vh; 
             
+            
+          }
+          #skill_div{
+            height: 100vh; 
+            justify-content: center;
+            align-content: center;
           }
 
         #about{

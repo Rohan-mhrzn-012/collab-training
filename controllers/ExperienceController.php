@@ -46,20 +46,50 @@ class ExperienceController
 
     public function create(){
         if($_SERVER["REQUEST_METHOD"]==="POST"){
+            $errors = [];
             $title = $_POST["title"] ?? null;
+            if (empty($title)) {                
+                $errors['title'] = "The title is empty";
+            }
             $organization = $_POST["organization"] ?? null;
+            if (empty($organization)) {                
+                $errors['organization'] = "The organization is empty";
+            }
             $location = $_POST["location"] ?? null;
+            if (empty($location)) {                
+                $errors['location'] = "The location is empty";
+            }
             $description = $_POST["description"] ?? null;
+            if (empty($description)) {                
+                $errors['description'] = "The description is empty";
+            }
             $start_date = $_POST["start_date"] ?? null;
             $end_date = $_POST["end_date"] ?? null;
+            if (empty($start_date) || empty($end_date)) {
+                $errors['date'] = "The dates are empty";
+                }elseif (!empty($start_date) && !empty($end_date)) {
+                if (strtotime($start_date) > strtotime($end_date)) {
+                    $errors['date'] = "ERROR:The end date is earlier than start date";
+                }
+            }
             $username = $_POST["username"] ?? null;
 
-            $user_query="SELECT id from users where username=?";
+            if (empty($username)) {
+                $errors["username"] = "The username is empty";
+            }else{
+                $user_query="SELECT id from users where username=?";
             $user_stmt=$this->connection->prepare($user_query);
             $user_stmt->bind_param("s", $username);
             $user_stmt->execute();
             $user_result=$user_stmt->get_result();
             $user_id=$user_result->fetch_assoc()["id"];
+            }  
+            if (!empty($errors)) {
+                $_SESSION['errors'] = $errors;
+                $_SESSION['old'] = $_POST;
+                header("Location:/core_php/collab-training/index.php?page=create-experience");
+                exit;
+            }          
 
             $query="INSERT into experience (title,organization,location,description,start_date,end_date,user_id) values(?,?,?,?,?,?,?)";
             $stmt = $this->connection->prepare($query);
