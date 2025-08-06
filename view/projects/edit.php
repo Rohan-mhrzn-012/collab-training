@@ -55,10 +55,10 @@ $statuses = ['starting', 'ongoing', 'completed'];
     <?php endif; ?>
     
     <label for="start date">Start Date:</label>
-    <input type="date" id="start_date" name="start_date" value="<?php echo $old["start_date"] ??$edit_data["start_date"] ?>">
+    <input type="date" id="start_date" name="start_date" value="<?php echo $old["start_date"] ??$edit_data["start_date"] ?>" class="form-control">
 
     <label for="end date">End Date:</label>
-    <input type="date" id="end_date" name="end_date" value="<?php echo $old["end_date"]??$edit_data["end_date"] ?>">
+    <input type="date" id="end_date" name="end_date" value="<?php echo $old["end_date"]??$edit_data["end_date"] ?>" class="form-control">
 
     <?php if (!empty($errors["date"])): ?>
         <div class="alert alert-danger" ><?php echo($errors["date"]); ?></div>

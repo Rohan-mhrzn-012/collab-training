@@ -59,14 +59,16 @@ $statuses = ['starting', 'ongoing', 'completed'];
     <!-- <label for="project description">Project Description:</label>
     <input type="text" id="project_description" name="project_description" value="" placeholder="Enter the project details"> -->
     <label for="start date">Start Date:</label>
-    <input type="date" id="start_date" name="start_date" value="<?php echo$old["start_date"]??'';?>">
+    <input type="date" id="start_date" name="start_date" value="<?php echo$old["start_date"]??'';?>" class="form-control">
+
     <label for="end date">End Date:</label>
-    <input type="date" id="end_date" name="end_date" value="<?php echo$old["end_date"]??'';?>">
+    <input type="date" id="end_date" name="end_date" value="<?php echo$old["end_date"]??'';?>" class="form-control">
+
     <?php if (!empty($errors["date"])): ?>
         <div class="alert alert-danger" ><?php echo($errors["date"])??'' ?></div>
     <?php endif; ?>
     <label for="status">Project Status:</label>
-    <select name="status" id="status">
+    <select name="status" id="status" class="form-select">
         <option value="">Select the project status</option>
         <?php foreach ($statuses as $status_value): ?>
             <option value="<?php echo $status_value; ?>" 
@@ -82,7 +84,7 @@ $statuses = ['starting', 'ongoing', 'completed'];
     <!-- <input type="text" id="status" name="status" value="" placeholder="Enter the project status"> -->
 
     <label for="Username">User:</label>
-    <select name="username" id="username">
+    <select name="username" id="username" class="form-select">
         <option value=""> Select a username </option>
         <?php foreach ($datas as $data): ?>
             <option value="<?php echo $data["username"]; ?>" name="" <?php echo (!empty($old['username']) && $old['username'] === $data["username"]) ? 'selected' : ''; ?>><?php echo $data["username"]; ?></option>

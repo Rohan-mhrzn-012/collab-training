@@ -55,14 +55,11 @@ $users=["woodcarver","programmer","roshan","pradeep"];
     </div>
 
     <label for="created_at">Created At:</label>
-    <input type="date" id="created_at" name="created_at" value="">
+    <input type="date" id="created_at" name="created_at" value="" class="form-control">
 
     <label for="updated_at">Updated At:</label>
-    <input type="date" id="updated_at" name="updated_at" value="">
-
-
-
-
+    <input type="date" id="updated_at" name="updated_at" value="" class="form-control">
+    
     <button type="submit" id="update_btn" class="btn btn-success">Add new Skill details</button>
 
 </form>

@@ -60,10 +60,10 @@
     </div>
 
     <label for="start_date">Start Date:</label>
-    <input type="date" id="start_date" name="start_date" value="<?php echo$data["start_date"]?>">
+    <input type="date" id="start_date" name="start_date" value="<?php echo$data["start_date"]?>" class="form-control">
 
     <label for="end_date">End Date:</label>
-    <input type="date" id="end_date" name="end_date" value="<?php echo$data["end_date"]?>">
+    <input type="date" id="end_date" name="end_date" value="<?php echo$data["end_date"]?>" class="form-control">
 
     <button type="submit" id="update_btn" class="btn btn-success">Add new experience details</button>
 

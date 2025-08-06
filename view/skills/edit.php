@@ -64,10 +64,10 @@ $levels = ['beginner', 'intermediate', 'advanced'];
     </div>
     
     <label for="created_at">Created At:</label>
-    <input type="date" id="created_at" name="created_at" value="<?php echo $edit_data["created_at"]; ?>">
+    <input type="date" id="created_at" name="created_at" value="<?php echo $edit_data["created_at"]; ?>" class="form-control">
 
     <label for="updated_at">Updated At:</label>
-    <input type="date" id="updated_at" name="updated_at" value="<?php echo $edit_data["updated_at"]; ?>">    
+    <input type="date" id="updated_at" name="updated_at" value="<?php echo $edit_data["updated_at"]; ?>" class="form-control">    
 
     
     <button type="submit" id="update_btn" class="btn btn-success">Update Skill details</button>
