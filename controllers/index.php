@@ -1,22 +1,22 @@
-<?php 
-    include __DIR__. '/../database/db.php';
+<?php
+include __DIR__ . '/../database/db.php';
+$database = new Database();
+$connection = $database->getConnection();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+$loggedInUser = $_SESSION['user'] ?? null;
 
-    $db = new Database();
-    $connection = $db->getConnection();
+if ($loggedInUser === null) {
+    header("Location: /collab-training/login.php");
+    exit;
+}
 
-    $loggedInUser = $_SESSION['user'] ?? null;
+$query = 'SELECT * FROM users;';
+$result = $connection->query($query);
 
-    if ($loggedInUser === null) {
-        header("Location: /collab-training/login.php");
-        exit;
-    }
+$users = [];
 
-    $query = 'SELECT * FROM users;';
-    $result = $connection->query($query);
-
-    $users = [];
-
-    if ($result) {
-        $users = $result->fetch_all(MYSQLI_ASSOC);
-    }
-?>
+if ($result) {
+    $users = $result->fetch_all(MYSQLI_ASSOC);
+}

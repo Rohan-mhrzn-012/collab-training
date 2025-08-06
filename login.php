@@ -27,7 +27,9 @@ if(session_status() === PHP_SESSION_NONE){
 
     <label for="password">Password:</label><br>
     <input type="password" id="password" name="password"><br><br>
-
+    <div class="create_new" style="text-align: center;">
+    <a href="/../collab-training/register.php">Create New Account</a></div>
+<br><br>
     <button type="submit">Login</button>
   </form>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>

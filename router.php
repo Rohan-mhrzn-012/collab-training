@@ -6,17 +6,20 @@ require_once __DIR__ . '/validator/AuthValidator.php';
 $route = $_GET['route'] ?? null;
 $method = $_SERVER['REQUEST_METHOD'];
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST' || $_GET['route'] === 'auth/logout') {
+
+$Authcontroller = new AuthController();
+$Usercontroller = new UserController();
 switch ($route) {
     case 'auth/login':
         if ($method === 'POST') {
-            $authController = new AuthController();
             
             $email = $_POST['email'] ?? '';
             $password = $_POST['password'] ?? '';
 
             $validation = AuthValidator::loginValidation($_POST);
 
-            $response = $authController->login($email, $password);
+            $response = $Authcontroller->login($email, $password);
 
             if ($response['success'] == true) {
                  http_response_code($response['status_code']);
@@ -33,20 +36,24 @@ switch ($route) {
         }
 
     case 'auth/logout':
-        $authController = new AuthController;
-        $authController->logout();
+        $Authcontroller->logout();
         break;
         
     case 'auth/register':
-        $authController = new AuthController;
-        $authController->register();
+        $Authcontroller->register();
         break;
 
-    case 'user/delete' :
-        $userController = new UserController;
-        $userController->delete();
+    
+    case 'edit':
+        $Usercontroller->updateUser();
         break;
+    case 'delete':
+        $Usercontroller->delete();
+        break;
+
     default:
-        header('Location: /collab-training/views/404.php');
+        header("Location: /collab-training/login.php");
         break;
+    }
 }
+

@@ -8,8 +8,8 @@
 <link rel="stylesheet" href="./public/css/style.css">
 
 <body>
-  <div class="wrapper">
-    <div class="container">
+  <div class="wrapper" >
+    <div class="container" style="height: 100%;">
       <div class="sub-container">
         <div class="banner-container">
           <img src="./public/images/lavender.jpg" alt="">
