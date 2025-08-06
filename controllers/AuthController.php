@@ -1,5 +1,6 @@
 <?php 
 include_once __DIR__ . "/../database/db.php";
+include_once __DIR__ . "./MailController.php";
 
 class AuthController {
     private $connection;
@@ -96,6 +97,10 @@ class AuthController {
                 $user_role_execution_query->bind_param('ii', $user_id, $role_id);
                 $user_role_execution_query->execute();
 
+                $mail = new MailController;
+                $subject = 'User Registered';
+                $body = "<h1>Hey there, you have registered a new account with the username: $username";
+                $mail->sendMail($email, $subject, $body);
                 header('Location: /collab-training/login.php');
                 exit;
             } else {
