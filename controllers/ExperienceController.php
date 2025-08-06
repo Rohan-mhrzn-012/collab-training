@@ -49,6 +49,7 @@ class ExperienceController
             $title = $_POST["title"] ?? null;
             $organization = $_POST["organization"] ?? null;
             $location = $_POST["location"] ?? null;
+            $description = $_POST["description"] ?? null;
             $start_date = $_POST["start_date"] ?? null;
             $end_date = $_POST["end_date"] ?? null;
             $username = $_POST["username"] ?? null;
@@ -60,9 +61,9 @@ class ExperienceController
             $user_result=$user_stmt->get_result();
             $user_id=$user_result->fetch_assoc()["id"];
 
-            $query="INSERT into experience (title,organization,location,start_date,end_date,user_id) values(?,?,?,?,?,?)";
+            $query="INSERT into experience (title,organization,location,description,start_date,end_date,user_id) values(?,?,?,?,?,?,?)";
             $stmt = $this->connection->prepare($query);
-            $stmt->bind_param("sssssi", $title, $organization, $location,$start_date,$end_date,$user_id);
+            $stmt->bind_param("ssssssi", $title, $organization, $location,$description,$start_date,$end_date,$user_id);
             
             
             if($stmt->execute()){
@@ -81,13 +82,14 @@ class ExperienceController
             $title=$_POST["title"]??null;
             $organization=$_POST["organization"]??null;
             $location=$_POST["location"]??null;
+            $description=$_POST["description"]??null;
             $start_date=$_POST["start_date"]??null;
             $end_date=$_POST["end_date"]??null;
             $username=$_POST["username"];
 
-            $query="UPDATE  experience INNER JOIN users on experience.user_id=users.id set experience.title=?, experience.organization=?,experience.location=?,experience.start_date=?,experience.end_date=?,users.username=?  where experience.id=?";
+            $query="UPDATE  experience INNER JOIN users on experience.user_id=users.id set experience.title=?, experience.organization=?,experience.location=?,experience.description=?,experience.start_date=?,experience.end_date=?,users.username=?  where experience.id=?";
             $stmt=$this->connection->prepare($query);
-            $stmt->bind_param("ssssssi",$title,$organization,$location,$start_date,$end_date,$username,$id);
+            $stmt->bind_param("sssssssi",$title,$organization,$location,$experience,$start_date,$end_date,$username,$id);
             
             if($stmt->execute()){
                 header("Location:/core_php/collab-training/index.php?page=experience");

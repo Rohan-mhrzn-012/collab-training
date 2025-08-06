@@ -19,6 +19,7 @@
             <th>Title</th>
             <th>Organization</th>
             <th>Location</th>
+            <th>Description</th>
             <th>Start Date</th>
             <th>End Date</th>
             <th>Action</th>
@@ -31,6 +32,7 @@
             <td><?php echo $data["title"];?></td>
             <td><?php echo $data["organization"];?></td>
             <td><?php echo $data["location"];?></td>
+            <td><?php echo $data["description"];?></td>
             <td><?php echo $data["start_date"];?></td>
             <td><?php echo $data["end_date"];?></td>
             <td>

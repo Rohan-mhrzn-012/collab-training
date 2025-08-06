@@ -50,6 +50,11 @@ $users=["pradeep","woodcarver","programmer","roshan"];
         <input type="text" class="form-control" name="location" id="location" value="" placeholder="Enter the location of the organization">
     </div>
 
+    <div class="mb-3">
+        <label for="description" class="form-label">Description:</label>
+        <input type="text" class="form-control" name="description" id="description" value="" placeholder="Enter the description">
+    </div>
+
     <label for="start_date">Start Date:</label>
     <input type="date" id="start_date" name="start_date" value="">
 
