@@ -98,8 +98,9 @@ $projects = $project_obj->index();
 </table>
 
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"> </script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-<script>
+<!-- <script>
     $(document).ready(function (){
         $(".btn-danger").click(function (){
             let id =$(this).data("id");
@@ -126,5 +127,50 @@ $projects = $project_obj->index();
             }
         });
 
+    });
+</script> -->
+
+
+<script>
+    $(document).ready(function () {
+        $(".btn-danger").click(function () {
+            let id = $(this).data("id");
+            const row = $(this).closest("tr");
+
+            Swal.fire({
+                title: "Are you sure you want to delete this project?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, delete it!"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: "/core_php/collab-training/routes.php?route=project&action=delete",
+                        type: "POST",
+                        data: { project_id: id },
+                        success: function (response) {
+                            let res = JSON.parse(response);
+                            if (res.status === "success") {
+                                Swal.fire(
+                                    "Deleted!",
+                                    "Deletion successful.",
+                                    "success"
+                                );
+                                row.hide();
+                            } else {
+                                Swal.fire(
+                                    "Error!",
+                                    "Deletion failed: " + res.message,
+                                    "error"
+                                );
+                            }
+                        }
+                    });
+                }
+            });
+        });
     });
 </script>
