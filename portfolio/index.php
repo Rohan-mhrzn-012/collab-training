@@ -85,7 +85,7 @@ and learning new technologies.</pre>
             <div class="Con1">
         <h2>Contact Us</h2>
         <pre>Realize your dream with us</pre><br>
-<a href="<?php echo $user["github"]?>>" id="githubs"><i class="fab fa-github gitss" ></i></a>
+<a href="<?php echo $user["github"]?>" id="githubs"><i class="fab fa-github gitss" ></i></a>
 <a href="<?php echo $user["linkedin"]?>>"><i class="fa-brands fa-linkedin gitss"></i></a>
     </div>
 

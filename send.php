@@ -36,7 +36,7 @@ try {
     $mail->AltBody = "Name: $name\nEmail: $email\nPhone: $phone\nMessage:\n" . strip_tags($message);
 
     $mail->send();
-    var_dump("Message sent successfully!") ;
+    echo ("Message sent successfully!") ;
 } catch (Exception $e) {
     echo "Mailer Error: {$mail->ErrorInfo}";
 }
