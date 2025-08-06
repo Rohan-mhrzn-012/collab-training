@@ -48,6 +48,8 @@ if(session_status() === PHP_SESSION_NONE){
           data: formData,
           dataType: 'json',
           success: function(response){
+            console.log(response);
+            
             // check if sucesss true
             // dashboard redirect
              const Toast = Swal.mixin({

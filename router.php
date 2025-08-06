@@ -5,8 +5,7 @@ require_once __DIR__ . '/validator/AuthValidator.php';
 
 $route = $_GET['route'] ?? null;
 $method = $_SERVER['REQUEST_METHOD'];
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST' || $_GET['route'] === 'auth/logout') {
+// if ($method === 'POST' || $route === 'auth/logout') {
 
 $Authcontroller = new AuthController();
 $Usercontroller = new UserController();
@@ -42,8 +41,6 @@ switch ($route) {
     case 'auth/register':
         $Authcontroller->register();
         break;
-
-    
     case 'edit':
         $Usercontroller->updateUser();
         break;
@@ -52,8 +49,8 @@ switch ($route) {
         break;
 
     default:
-        header("Location: /collab-training/login.php");
+        // header("Location: /collab-training/login.php");
         break;
     }
-}
+// }
 
